@@ -5,12 +5,14 @@ interface CardContainerProps {
   children: ReactNode;
   className?: string;
   hover?: boolean;
+  onClick?: () => void;
 }
 
 export const CardContainer: React.FC<CardContainerProps> = ({ 
   children, 
   className = '', 
-  hover = true 
+  hover = true,
+  onClick 
 }) => {
   return (
     <motion.div
@@ -19,6 +21,8 @@ export const CardContainer: React.FC<CardContainerProps> = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       whileHover={hover ? { y: -4 } : {}}
+      onClick={onClick}
+      style={{ cursor: onClick ? 'pointer' : 'default' }}
     >
       {children}
     </motion.div>
