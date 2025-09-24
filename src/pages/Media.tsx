@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Box, Typography, Container, Dialog, DialogContent } from '@mui/material';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { CardContainer } from '../components/ui/CardContainer';
 import { useState } from 'react';
 import { ImageSlider } from '../components/ui/ImageSlider';
@@ -190,80 +191,147 @@ const MediaGallery = () => {
             ))}
           </Box>
 
-          {/* Masonry Grid */}
+          {/* Enhanced Masonry Grid with varied sizes */}
           <Box 
             sx={{ 
-              columns: { xs: 1, sm: 2, md: 3, lg: 4 },
-              columnGap: 3,
-              '& > *': {
-                breakInside: 'avoid',
-                marginBottom: 3,
-              }
+              display: 'grid',
+              gridTemplateColumns: { 
+                xs: '1fr', 
+                sm: 'repeat(auto-fit, minmax(280px, 1fr))',
+                md: 'repeat(auto-fit, minmax(320px, 1fr))',
+                lg: 'repeat(auto-fit, minmax(350px, 1fr))'
+              },
+              gap: { xs: 2, sm: 3, md: 4 },
+              justifyContent: 'center',
             }}
           >
-            {filteredItems.map((item, index) => (
-              <motion.div
-                key={`${activeCategory}-${item.id}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                style={{ cursor: 'pointer' }}
-                onClick={() => openImageModal(item)}
-              >
-                <CardContainer hover={true}>
-                  <motion.img
-                    src={item.src}
-                    alt={item.alt}
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      objectFit: 'cover',
-                      borderRadius: 'var(--radius)',
-                      marginBottom: 12
-                    }}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <Typography 
-                    variant="h6" 
-                    sx={{ 
-                      mb: 1,
-                      color: 'hsl(var(--foreground))',
-                      fontFamily: 'Poppins, sans-serif',
-                      fontWeight: 600,
-                      fontSize: '1rem',
-                    }}
-                  >
-                    {item.title}
-                  </Typography>
-                  <Typography 
-                    variant="body2" 
-                    sx={{ 
-                      color: 'hsl(var(--muted-foreground))',
-                      fontFamily: 'Poppins, sans-serif',
-                      lineHeight: 1.4,
-                      fontSize: '0.875rem',
-                    }}
-                  >
-                    {item.description}
-                  </Typography>
-                </CardContainer>
-              </motion.div>
-            ))}
+            {filteredItems.map((item, index) => {
+              // Create varied aspect ratios for different items
+              const aspectRatios = ['4/3', '3/4', '16/9', '1/1', '4/5'];
+              const aspectRatio = aspectRatios[index % aspectRatios.length];
+              
+              return (
+                <motion.div
+                  key={`${activeCategory}-${item.id}`}
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.1,
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 15
+                  }}
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => openImageModal(item)}
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                >
+                  <CardContainer hover={true} className="overflow-hidden group">
+                    <motion.div
+                      style={{ 
+                        aspectRatio,
+                        overflow: 'hidden',
+                        borderRadius: 'var(--radius)',
+                        position: 'relative'
+                      }}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          borderRadius: 'var(--radius)',
+                          transition: 'filter 0.3s ease'
+                        }}
+                        className="group-hover:brightness-110 group-hover:contrast-110"
+                      />
+                      
+                      {/* Overlay on hover */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4"
+                        style={{ borderRadius: 'var(--radius)' }}
+                      >
+                        <div className="text-white">
+                          <h4 className="font-semibold text-sm mb-1">{item.title}</h4>
+                          <p className="text-xs text-white/80 line-clamp-2">{item.description}</p>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                    
+                    {/* Content below image */}
+                    <Box sx={{ p: 2 }}>
+                      <Typography 
+                        variant="h6" 
+                        sx={{ 
+                          mb: 1,
+                          color: 'hsl(var(--foreground))',
+                          fontFamily: 'Poppins, sans-serif',
+                          fontWeight: 600,
+                          fontSize: '1rem',
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        {item.title}
+                      </Typography>
+                      <Typography 
+                        variant="body2" 
+                        sx={{ 
+                          color: 'hsl(var(--muted-foreground))',
+                          fontFamily: 'Poppins, sans-serif',
+                          lineHeight: 1.4,
+                          fontSize: '0.875rem',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {item.description}
+                      </Typography>
+                      
+                      {/* Category badge */}
+                      <Box 
+                        sx={{ 
+                          mt: 2,
+                          display: 'inline-block',
+                          px: 2,
+                          py: 0.5,
+                          backgroundColor: 'hsl(var(--primary))',
+                          color: 'hsl(var(--primary-foreground))',
+                          borderRadius: '20px',
+                          fontSize: '0.75rem',
+                          fontFamily: 'Poppins, sans-serif',
+                          textTransform: 'capitalize',
+                          fontWeight: 500,
+                        }}
+                      >
+                        {item.category}
+                      </Box>
+                    </Box>
+                  </CardContainer>
+                </motion.div>
+              );
+            })}
           </Box>
         </motion.div>
       </Container>
 
-      {/* Image Modal */}
+      {/* Enhanced Gallery Modal */}
       <Dialog 
         open={!!selectedImage} 
         onClose={closeImageModal}
-        maxWidth="lg"
+        maxWidth="xl"
         fullWidth
         PaperProps={{
           sx: {
-            borderRadius: 'var(--radius)',
+            borderRadius: '24px',
             backgroundColor: 'hsl(var(--card))',
+            overflow: 'hidden',
+            maxHeight: '90vh',
           }
         }}
       >
@@ -272,105 +340,143 @@ const MediaGallery = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.4, type: "spring", stiffness: 100 }}
             >
-              <Box sx={{ position: 'relative' }}>
-                <img
+              <Box sx={{ position: 'relative', height: '70vh', overflow: 'hidden' }}>
+                <motion.img
+                  key={selectedImage.id}
                   src={selectedImage.src}
                   alt={selectedImage.alt}
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
                   style={{
                     width: '100%',
-                    height: 'auto',
-                    maxHeight: '70vh',
+                    height: '100%',
                     objectFit: 'contain',
-                    borderRadius: 'var(--radius)',
+                    backgroundColor: 'hsl(var(--muted))',
                   }}
                 />
                 
-                {/* Navigation Arrows */}
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    left: 16,
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    backgroundColor: 'rgba(0,0,0,0.5)',
-                    color: 'white',
-                    borderRadius: '50%',
-                    width: 40,
-                    height: 40,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    '&:hover': {
-                      backgroundColor: 'rgba(0,0,0,0.7)',
-                    }
-                  }}
-                  onClick={() => navigateImage('prev')}
+                {/* Close button */}
+                <motion.button
+                  onClick={closeImageModal}
+                  className="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/70 transition-all"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                 >
-                  &#8249;
-                </Box>
+                  ✕
+                </motion.button>
                 
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    right: 16,
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    backgroundColor: 'rgba(0,0,0,0.5)',
-                    color: 'white',
-                    borderRadius: '50%',
-                    width: 40,
-                    height: 40,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    '&:hover': {
-                      backgroundColor: 'rgba(0,0,0,0.7)',
-                    }
-                  }}
-                  onClick={() => navigateImage('next')}
+                {/* Navigation Arrows with improved styling */}
+                <motion.button
+                  onClick={() => navigateImage('prev')}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 backdrop-blur-md text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-black/70 transition-all shadow-lg"
+                  whileHover={{ scale: 1.1, x: -2 }}
+                  whileTap={{ scale: 0.9 }}
                 >
-                  &#8250;
-                </Box>
+                  <ChevronLeft className="w-6 h-6" />
+                </motion.button>
+                
+                <motion.button
+                  onClick={() => navigateImage('next')}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 backdrop-blur-md text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-black/70 transition-all shadow-lg"
+                  whileHover={{ scale: 1.1, x: 2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </motion.button>
+                
+                {/* Image counter */}
+                <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-full text-sm">
+                  {currentImageIndex + 1} / {filteredItems.length}
+                </div>
               </Box>
               
-              <Box sx={{ p: 3 }}>
-                <Typography 
-                  variant="h5" 
-                  sx={{ 
-                    mb: 2,
-                    color: 'hsl(var(--foreground))',
-                    fontFamily: 'Poppins, sans-serif',
-                    fontWeight: 600,
-                  }}
-                >
-                  {selectedImage.title}
-                </Typography>
-                <Typography 
-                  variant="body1" 
-                  sx={{ 
-                    color: 'hsl(var(--muted-foreground))',
-                    fontFamily: 'Poppins, sans-serif',
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {selectedImage.description}
-                </Typography>
-                <Typography 
-                  variant="body2" 
-                  sx={{ 
-                    mt: 2,
-                    color: 'hsl(var(--primary))',
-                    fontFamily: 'Poppins, sans-serif',
-                    textTransform: 'capitalize',
-                  }}
-                >
-                  Category: {selectedImage.category}
-                </Typography>
-              </Box>
+              {/* Enhanced content section */}
+              <motion.div 
+                className="p-6 bg-gradient-to-r from-hsl(var(--card)) to-hsl(var(--muted))"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.3 }}
+              >
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography 
+                      variant="h4" 
+                      sx={{ 
+                        mb: 2,
+                        color: 'hsl(var(--foreground))',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontWeight: 600,
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {selectedImage.title}
+                    </Typography>
+                    <Typography 
+                      variant="body1" 
+                      sx={{ 
+                        color: 'hsl(var(--muted-foreground))',
+                        fontFamily: 'Poppins, sans-serif',
+                        lineHeight: 1.6,
+                        fontSize: '1.1rem',
+                        mb: 3,
+                      }}
+                    >
+                      {selectedImage.description}
+                    </Typography>
+                  </Box>
+                  
+                  <Box 
+                    sx={{ 
+                      ml: 3,
+                      px: 3,
+                      py: 1,
+                      backgroundColor: 'hsl(var(--primary))',
+                      color: 'hsl(var(--primary-foreground))',
+                      borderRadius: '24px',
+                      fontSize: '0.9rem',
+                      fontFamily: 'Poppins, sans-serif',
+                      textTransform: 'capitalize',
+                      fontWeight: 600,
+                      boxShadow: '0 4px 12px hsl(var(--primary) / 0.3)',
+                    }}
+                  >
+                    {selectedImage.category}
+                  </Box>
+                </Box>
+                
+                {/* Thumbnail gallery */}
+                <Box sx={{ display: 'flex', gap: 2, overflowX: 'auto', pb: 2 }}>
+                  {filteredItems.map((item, index) => (
+                    <motion.div
+                      key={item.id}
+                      className="flex-shrink-0 cursor-pointer"
+                      onClick={() => {
+                        setSelectedImage(item);
+                        setCurrentImageIndex(index);
+                      }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        style={{
+                          width: '80px',
+                          height: '60px',
+                          objectFit: 'cover',
+                          borderRadius: '8px',
+                          border: item.id === selectedImage.id ? '3px solid hsl(var(--primary))' : '2px solid transparent',
+                          opacity: item.id === selectedImage.id ? 1 : 0.7,
+                          transition: 'all 0.2s ease',
+                        }}
+                      />
+                    </motion.div>
+                  ))}
+                </Box>
+              </motion.div>
             </motion.div>
           )}
         </DialogContent>
