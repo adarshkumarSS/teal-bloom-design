@@ -396,9 +396,15 @@ export const Program: React.FC = () => {
           
           {/* Programs Grid */}
           {filteredPrograms.length > 0 ? (
-            <Grid container spacing={4}>
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
+                gap: 4
+              }}
+            >
               {filteredPrograms.map((program, index) => (
-                <Grid item xs={12} md={4} key={program.id}>
+                <Box key={program.id}>
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -407,9 +413,9 @@ export const Program: React.FC = () => {
                   >
                     <ProgramCard program={program} />
                   </motion.div>
-                </Grid>
+                </Box>
               ))}
-            </Grid>
+            </Box>
           ) : (
             <Box sx={{ textAlign: 'center', py: 8 }}>
               <Typography 

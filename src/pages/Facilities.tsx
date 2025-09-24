@@ -155,9 +155,15 @@ const ShowcaseVideosSection = () => {
             Facility Showcase
           </Typography>
           
-          <Grid container spacing={4}>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
+              gap: 4
+            }}
+          >
             {videos.map((video, index) => (
-              <Grid item xs={12} sm={6} md={4} key={video.id}>
+              <Box key={video.id}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -247,9 +253,9 @@ const ShowcaseVideosSection = () => {
                     </Typography>
                   </CardContainer>
                 </motion.div>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </motion.div>
       </Container>
     </Box>
@@ -320,9 +326,15 @@ const InfrastructureSection = () => {
         {title}
       </Typography>
       
-      <Grid container spacing={4}>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
+          gap: 4
+        }}
+      >
         {facilities.map((facility, index) => (
-          <Grid item xs={12} md={4} key={facility.id}>
+          <Box key={facility.id}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -390,9 +402,9 @@ const InfrastructureSection = () => {
                 </Box>
               </CardContainer>
             </motion.div>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 
