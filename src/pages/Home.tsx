@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Box, Typography, Container } from '@mui/material';
+import { Box, Typography, Container, Grid } from '@mui/material';
 import { CardContainer } from '../components/ui/CardContainer';
 import { Loader } from '../components/ui/Loader';
 import { ScrollingLogos } from '../components/ui/ScrollingLogos';

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Box, Typography, Container, Dialog, DialogContent } from '@mui/material';
+import { Box, Typography, Container, Dialog, DialogContent, Grid } from '@mui/material';
 import { CardContainer } from '../components/ui/CardContainer';
 import { useState } from 'react';
 import { ImageSlider } from '../components/ui/ImageSlider';

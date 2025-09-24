@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Box, Typography, Container, Tabs, Tab } from '@mui/material';
+import { Box, Typography, Container, Grid, Tabs, Tab } from '@mui/material';
 import { CardContainer } from '../components/ui/CardContainer';
 import { OutlinedTextField } from '../components/ui/OutlinedTextField';
 import { useState } from 'react';
@@ -396,15 +396,9 @@ export const Program: React.FC = () => {
           
           {/* Programs Grid */}
           {filteredPrograms.length > 0 ? (
-            <Box
-              sx={{
-                display: 'grid',
-                gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
-                gap: 4
-              }}
-            >
+            <Grid container spacing={4}>
               {filteredPrograms.map((program, index) => (
-                <Box key={program.id}>
+                <Grid item xs={12} md={4} key={program.id}>
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -413,9 +407,9 @@ export const Program: React.FC = () => {
                   >
                     <ProgramCard program={program} />
                   </motion.div>
-                </Box>
+                </Grid>
               ))}
-            </Box>
+            </Grid>
           ) : (
             <Box sx={{ textAlign: 'center', py: 8 }}>
               <Typography 

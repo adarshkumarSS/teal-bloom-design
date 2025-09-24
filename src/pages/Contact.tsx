@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Box, Typography, Container } from '@mui/material';
+import { Box, Typography, Container, Grid } from '@mui/material';
 import { CardContainer } from '../components/ui/CardContainer';
 import { OutlinedTextField } from '../components/ui/OutlinedTextField';
 import { DarkButton } from '../components/ui/DarkButton';
@@ -492,20 +492,14 @@ export const Contact: React.FC = () => {
       </Container>
       
       <Container maxWidth="lg" sx={{ pb: 8 }}>
-        <Box 
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
-            gap: 6
-          }}
-        >
-          <Box>
+        <Grid container spacing={6}>
+          <Grid item xs={12} md={6}>
             <ContactForm />
-          </Box>
-          <Box>
+          </Grid>
+          <Grid item xs={12} md={6}>
             <ContactInfo />
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       </Container>
       
       <CEOInfo />

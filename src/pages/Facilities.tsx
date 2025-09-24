@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Box, Typography, Container } from '@mui/material';
+import { Box, Typography, Container, Grid } from '@mui/material';
 import { CardContainer } from '../components/ui/CardContainer';
 
 interface VideoCard {
@@ -155,15 +155,9 @@ const ShowcaseVideosSection = () => {
             Facility Showcase
           </Typography>
           
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
-              gap: 4
-            }}
-          >
+          <Grid container spacing={4}>
             {videos.map((video, index) => (
-              <Box key={video.id}>
+              <Grid item xs={12} sm={6} md={4} key={video.id}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -253,9 +247,9 @@ const ShowcaseVideosSection = () => {
                     </Typography>
                   </CardContainer>
                 </motion.div>
-              </Box>
+              </Grid>
             ))}
-          </Box>
+          </Grid>
         </motion.div>
       </Container>
     </Box>
@@ -326,15 +320,9 @@ const InfrastructureSection = () => {
         {title}
       </Typography>
       
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
-          gap: 4
-        }}
-      >
+      <Grid container spacing={4}>
         {facilities.map((facility, index) => (
-          <Box key={facility.id}>
+          <Grid item xs={12} md={4} key={facility.id}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -402,9 +390,9 @@ const InfrastructureSection = () => {
                 </Box>
               </CardContainer>
             </motion.div>
-          </Box>
+          </Grid>
         ))}
-      </Box>
+      </Grid>
     </Box>
   );
 
