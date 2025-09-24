@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Box, Typography, Container, Grid, Tabs, Tab } from '@mui/material';
+import { Box, Typography, Container, Tabs, Tab } from '@mui/material';
 import { CardContainer } from '../components/ui/CardContainer';
 import { OutlinedTextField } from '../components/ui/OutlinedTextField';
 import { useState } from 'react';
