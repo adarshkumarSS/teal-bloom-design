@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Box, Typography, Container, Grid, Avatar } from '@mui/material';
+import { Box, Typography, Container, Avatar } from '@mui/material';
 import { CardContainer } from '../components/ui/CardContainer';
 import { useState } from 'react';
 
@@ -350,9 +350,13 @@ const BoardMembersSection = () => {
             Board Members
           </Typography>
           
-          <Grid container spacing={4}>
+          <Box sx={{ 
+            display: 'grid', 
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, 
+            gap: 4 
+          }}>
             {boardMembers.map((member, index) => (
-              <Grid item xs={12} sm={6} md={4} key={member.id}>
+              <Box key={member.id}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -432,9 +436,9 @@ const BoardMembersSection = () => {
                     </motion.div>
                   </CardContainer>
                 </motion.div>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </motion.div>
       </Container>
     </Box>

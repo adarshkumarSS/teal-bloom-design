@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Box, Typography, Container, Dialog, DialogContent, Grid, Avatar } from '@mui/material';
+import { Box, Typography, Container, Dialog, DialogContent, Avatar } from '@mui/material';
 import { CardContainer } from '../components/ui/CardContainer';
 import { useState, useEffect } from 'react';
 import { ScrollingLogos } from '../components/ui/ScrollingLogos';
@@ -130,9 +130,13 @@ const CurrentStartupsSection = () => {
             Current Startups
           </Typography>
           
-          <Grid container spacing={3}>
+          <Box sx={{ 
+            display: 'grid', 
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, 
+            gap: 3 
+          }}>
             {currentStartups.map((startup, index) => (
-              <Grid item xs={12} sm={6} md={4} key={startup.id}>
+              <Box key={startup.id}>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -191,9 +195,9 @@ const CurrentStartupsSection = () => {
                     </Box>
                   </CardContainer>
                 </motion.div>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </motion.div>
       </Container>
     </Box>
@@ -293,9 +297,13 @@ const GraduatedStartupsSection = () => {
             <ScrollingLogos logos={logoData} direction="right" />
           </Box>
           
-          <Grid container spacing={3}>
+          <Box sx={{ 
+            display: 'grid', 
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }, 
+            gap: 3 
+          }}>
             {graduatedStartups.map((startup, index) => (
-              <Grid item xs={12} sm={6} md={3} key={startup.id}>
+              <Box key={startup.id}>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -345,9 +353,9 @@ const GraduatedStartupsSection = () => {
                     </Box>
                   </CardContainer>
                 </motion.div>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </motion.div>
       </Container>
     </Box>
