@@ -506,7 +506,7 @@ export const Portfolio: React.FC = () => {
   const [selectedStartup, setSelectedStartup] = useState<Startup | null>(null);
 
   return (
-    <Box sx={{ pt: 12, pb: 8, minHeight: '100vh' }}>
+    <Box sx={{ pt: 12, pb: 8, minHeight: '100vh', backgroundColor: 'hsl(var(--background))' }}>
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

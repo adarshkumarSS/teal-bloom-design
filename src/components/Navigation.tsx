@@ -90,7 +90,9 @@ export const Navigation: React.FC = () => {
         position="fixed"
         elevation={0}
         sx={{
-          background: isDarkMode ? "rgba(0, 0, 0, 0.9)" : "transparent",
+          background: isDarkMode 
+            ? (isHome ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.9)")
+            : "transparent",
           borderBottom: isDarkMode ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid rgba(255, 255, 255, 0.2)",
         }}
       >
