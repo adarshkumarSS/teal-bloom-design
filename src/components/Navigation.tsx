@@ -7,11 +7,11 @@ import { LightMode, DarkMode, Login } from "@mui/icons-material";
 import { DarkButton } from "./ui/DarkButton";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  background: "transparent",
   backdropFilter: "blur(20px)",
   borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
   boxShadow: "0 8px 30px rgba(0, 0, 0, 0.1)",
   fontFamily: "Poppins, sans-serif",
+  background: "transparent",
 }));
 
 const NavLink = styled(Link)<{ $isdark: boolean; $forcewhite: boolean }>(
@@ -90,7 +90,8 @@ export const Navigation: React.FC = () => {
         position="fixed"
         elevation={0}
         sx={{
-          background: "transparent",
+          background: isDarkMode ? "rgba(0, 0, 0, 0.9)" : "transparent",
+          borderBottom: isDarkMode ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid rgba(255, 255, 255, 0.2)",
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between", py: 1 }}>
