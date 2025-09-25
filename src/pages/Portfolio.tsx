@@ -110,7 +110,7 @@ const CurrentStartupsSection = () => {
   ];
 
   return (
-    <Box sx={{ py: 8 }}>
+    <Box sx={{ py: 8, backgroundColor: 'hsl(var(--background))' }}>
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
