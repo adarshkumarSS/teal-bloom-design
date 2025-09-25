@@ -15,17 +15,17 @@ interface ImageSliderProps {
   autoPlayInterval?: number;
 }
 
-export const ImageSlider: React.FC<ImageSliderProps> = ({
-  images,
-  autoPlay = true,
-  autoPlayInterval = 3000
+export const ImageSlider: React.FC<ImageSliderProps> = ({ 
+  images, 
+  autoPlay = true, 
+  autoPlayInterval = 3000 
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto-play functionality
   useEffect(() => {
     if (!autoPlay) return;
-
+    
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, autoPlayInterval);
@@ -56,31 +56,29 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
         <AnimatePresence mode="wait">
           {getVisibleImages().map((image, index) => (
             <motion.div
-              key={${image.id}-${image.position}-${currentIndex}}
+              key={`${image.id}-${image.position}-${currentIndex}`}
               className="absolute cursor-pointer"
-              initial={{
+              initial={{ 
                 scale: image.position === 0 ? 1.2 : 0.7,
                 opacity: image.position === 0 ? 1 : 0.4,
                 x: image.position * 240,
                 rotateY: image.position * 25,
-                z: image.position === 0 ? 200 : -200,
-
+                z: image.position === 0 ? 50 : 0
               }}
               animate={{
                 scale: image.position === 0 ? 1.2 : 0.7,
                 opacity: image.position === 0 ? 1 : 0.4,
                 x: image.position * 240,
                 rotateY: image.position * 25,
-                z: image.position === 0 ? 200 : -200,
-                zIndex: image.position === 0 ? 10 : 1,
+                z: image.position === 0 ? 50 : 0,
               }}
               exit={{
-                // scale: 0.5,
-                // opacity: 0,
+                scale: 0.5,
+                opacity: 0,
                 transition: { duration: 0.3 }
               }}
-              transition={{
-                duration: 0.8,
+              transition={{ 
+                duration: 0.8, 
                 ease: [0.25, 0.46, 0.45, 0.94],
                 type: "spring",
                 stiffness: 100,
@@ -90,14 +88,12 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
                 width: image.position === 0 ? '320px' : '280px',
                 height: image.position === 0 ? '320px' : '280px',
                 transformStyle: 'preserve-3d',
-
               }}
               onClick={() => setCurrentIndex((currentIndex + image.position + images.length) % images.length)}
               whileHover={{
                 scale: image.position === 0 ? 1.25 : 0.75,
                 transition: { duration: 0.2 }
               }}
-
             >
               <div className="rounded-3xl overflow-hidden shadow-2xl h-full relative group">
                 <motion.img
@@ -108,7 +104,7 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
                     filter: image.position === 0 ? 'brightness(1)' : 'brightness(0.7)',
                   }}
                 />
-
+                
                 {/* Gradient overlay for active image */}
                 {image.position === 0 && (
                   <motion.div
@@ -117,7 +113,7 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
                     className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
                   />
                 )}
-
+                
                 {/* Content overlay for center image */}
                 {image.position === 0 && (
                   <motion.div
@@ -126,13 +122,13 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
                     transition={{ delay: 0.3, duration: 0.5 }}
                     className="absolute bottom-0 left-0 right-0 p-6 text-white"
                   >
-                    <motion.h3
+                    <motion.h3 
                       className="text-xl font-bold mb-2 font-poppins"
                       style={{ textShadow: '0 2px 10px rgba(0,0,0,0.7)' }}
                     >
                       {image.title}
                     </motion.h3>
-                    <motion.p
+                    <motion.p 
                       className="text-white/90 text-sm leading-relaxed font-poppins"
                       style={{ textShadow: '0 1px 5px rgba(0,0,0,0.7)' }}
                     >
@@ -140,7 +136,7 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
                     </motion.p>
                   </motion.div>
                 )}
-
+                
                 {/* Glow effect for center image */}
                 {image.position === 0 && (
                   <div className="absolute inset-0 rounded-3xl ring-4 ring-primary/30 ring-offset-4 ring-offset-transparent" />
@@ -176,10 +172,11 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
           <motion.button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex
-                ? 'bg-white shadow-lg scale-125'
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentIndex 
+                ? 'bg-white shadow-lg scale-125' 
                 : 'bg-white/50 hover:bg-white/70'
-              }`}
+            }`}
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
           />
