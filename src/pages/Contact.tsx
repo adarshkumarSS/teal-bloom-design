@@ -356,7 +356,7 @@ const MapSection = () => {
             align="center"
             sx={{ 
               mb: 8,
-              color: 'white',
+              color: 'hsl(var(--foreground))',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 600,
             }}
@@ -469,7 +469,7 @@ const MapSection = () => {
 
 export const Contact: React.FC = () => {
   return (
-    <Box sx={{ pt: 12, minHeight: '100vh', backgroundColor: 'hsl(var(--background))' }}>
+    <Box sx={{ pt: 16, minHeight: '100vh', backgroundColor: 'hsl(var(--background))' }}>
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

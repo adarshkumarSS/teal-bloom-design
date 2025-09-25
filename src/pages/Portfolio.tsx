@@ -19,8 +19,7 @@ interface Startup {
   website: string;
 }
 
-const CurrentStartupsSection = () => {
-  const [selectedStartup, setSelectedStartup] = useState<Startup | null>(null);
+const CurrentStartupsSection = ({ onStartupClick }: { onStartupClick: (startup: Startup) => void }) => {
   
   const currentStartups: Startup[] = [
     {
@@ -145,7 +144,7 @@ const CurrentStartupsSection = () => {
                 >
                   <CardContainer 
                     className="cursor-pointer h-full"
-                    onClick={() => setSelectedStartup(startup)}
+                    onClick={() => onStartupClick(startup)}
                   >
                     <Box sx={{ textAlign: 'center' }}>
                       <motion.img
@@ -204,8 +203,7 @@ const CurrentStartupsSection = () => {
   );
 };
 
-const GraduatedStartupsSection = () => {
-  const [selectedStartup, setSelectedStartup] = useState<Startup | null>(null);
+const GraduatedStartupsSection = ({ onStartupClick }: { onStartupClick: (startup: Startup) => void }) => {
   
   const graduatedStartups: Startup[] = [
     {
@@ -312,7 +310,7 @@ const GraduatedStartupsSection = () => {
                 >
                   <CardContainer 
                     className="cursor-pointer h-full"
-                    onClick={() => setSelectedStartup(startup)}
+                    onClick={() => onStartupClick(startup)}
                   >
                     <Box sx={{ textAlign: 'center' }}>
                       <motion.img
@@ -506,7 +504,7 @@ export const Portfolio: React.FC = () => {
   const [selectedStartup, setSelectedStartup] = useState<Startup | null>(null);
 
   return (
-    <Box sx={{ pt: 12, pb: 8, minHeight: '100vh', backgroundColor: 'hsl(var(--background))' }}>
+    <Box sx={{ pt: 16, pb: 8, minHeight: '100vh', backgroundColor: 'hsl(var(--background))' }}>
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -528,8 +526,8 @@ export const Portfolio: React.FC = () => {
         </motion.div>
       </Container>
       
-      <CurrentStartupsSection />
-      <GraduatedStartupsSection />
+      <CurrentStartupsSection onStartupClick={setSelectedStartup} />
+      <GraduatedStartupsSection onStartupClick={setSelectedStartup} />
       
       <StartupModal 
         startup={selectedStartup}

@@ -447,7 +447,7 @@ const BoardMembersSection = () => {
 
 export const People: React.FC = () => {
   return (
-    <Box sx={{ pt: 12, pb: 8, minHeight: '100vh', backgroundColor: 'hsl(var(--background))' }}>
+    <Box sx={{ pt: 16, pb: 8, minHeight: '100vh', backgroundColor: 'hsl(var(--background))' }}>
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

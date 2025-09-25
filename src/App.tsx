@@ -12,6 +12,7 @@ import { People } from "./pages/People";
 import { Facilities } from "./pages/Facilities";
 import { Program } from "./pages/Program";
 import { Media } from "./pages/Media";
+import { Blogs } from "./pages/Blogs";
 import { Contact } from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -42,7 +43,7 @@ const App = () => (
             <Route path="/facilities" element={<Facilities />} />
             <Route path="/program" element={<Program />} />
             <Route path="/media" element={<Media />} />
-            <Route path="/blogs" element={<Media />} />
+            <Route path="/blogs" element={<Blogs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

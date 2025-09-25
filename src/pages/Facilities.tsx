@@ -436,7 +436,7 @@ const InfrastructureSection = () => {
 
 export const Facilities: React.FC = () => {
   return (
-    <Box sx={{ pt: 12, minHeight: '100vh' }}>
+    <Box sx={{ pt: 16, minHeight: '100vh', backgroundColor: 'hsl(var(--background))' }}>
       <BackgroundVideoSection />
       <ShowcaseVideosSection />
       <InfrastructureSection />
