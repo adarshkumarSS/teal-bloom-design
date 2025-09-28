@@ -356,7 +356,7 @@ const MapSection = () => {
             align="center"
             sx={{ 
               mb: 8,
-              color: 'white',
+              color: 'hsl(var(--background))',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 600,
             }}
@@ -381,7 +381,7 @@ const MapSection = () => {
                 <Typography 
                   variant="h6" 
                   sx={{ 
-                    color: 'rgba(255,255,255,0.7)',
+                    color: 'hsl(var(--background))',
                     fontFamily: 'Poppins, sans-serif',
                   }}
                 >
@@ -396,7 +396,7 @@ const MapSection = () => {
                   variant="h5" 
                   sx={{ 
                     mb: 4,
-                    color: 'white',
+                    color: 'hsl(var(--background))',
                     fontFamily: 'Poppins, sans-serif',
                     fontWeight: 600,
                   }}
@@ -420,7 +420,7 @@ const MapSection = () => {
                     <Typography 
                       variant="body1" 
                       sx={{ 
-                        color: 'rgba(255,255,255,0.9)',
+                        color: 'hsl(var(--background))',
                         fontFamily: 'Poppins, sans-serif',
                         lineHeight: 1.6,
                       }}
@@ -447,7 +447,7 @@ const MapSection = () => {
                     <Typography 
                       variant="body1" 
                       sx={{ 
-                        color: 'rgba(255,255,255,0.9)',
+                        color: 'hsl(var(--background))',
                         fontFamily: 'Poppins, sans-serif',
                         lineHeight: 1.6,
                       }}

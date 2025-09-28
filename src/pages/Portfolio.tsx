@@ -3,7 +3,7 @@ import { Box, Typography, Container, Dialog, DialogContent, Avatar } from '@mui/
 import { CardContainer } from '../components/ui/CardContainer';
 import { useState, useEffect } from 'react';
 import { ScrollingLogos } from '../components/ui/ScrollingLogos';
-import { SuccessStoryCarousel } from '../components/ui/SuccessStoryCarousel';
+import { SuccessStoryAnimated } from '../components/ui/SuccessStoryAnimated';
 
 interface Startup {
   id: number;
@@ -577,7 +577,7 @@ const SuccessStoriesSection = () => {
             Success Stories
           </Typography>
           
-          <SuccessStoryCarousel stories={successStories} />
+          <SuccessStoryAnimated stories={successStories} />
         </motion.div>
       </Container>
     </Box>

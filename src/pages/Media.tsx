@@ -207,10 +207,6 @@ const MediaGallery = () => {
             }}
           >
             {filteredItems.map((item, index) => {
-              // Create varied aspect ratios for different items
-              const aspectRatios = ['4/3', '3/4', '16/9', '1/1', '4/5'];
-              const aspectRatio = aspectRatios[index % aspectRatios.length];
-              
               return (
                 <motion.div
                   key={`${activeCategory}-${item.id}`}
@@ -227,10 +223,10 @@ const MediaGallery = () => {
                   onClick={() => openImageModal(item)}
                   whileHover={{ y: -8, transition: { duration: 0.2 } }}
                 >
-                  <CardContainer hover={true} className="overflow-hidden group">
+                   <CardContainer hover={true} className="overflow-hidden group">
                     <motion.div
                       style={{ 
-                        aspectRatio,
+                        aspectRatio: '4/3',
                         overflow: 'hidden',
                         borderRadius: 'var(--radius)',
                         position: 'relative'
