@@ -172,8 +172,7 @@ export const Navigation: React.FC = () => {
             <DarkButton
               startIcon={<Login />}
               sx={{
-                color:
-                  isHome && !scrolled ? "#fff" : isDarkMode ? "#fff" : "#222",
+                color: "#fff",
               }}
             >
               Login

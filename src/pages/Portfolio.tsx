@@ -3,6 +3,7 @@ import { Box, Typography, Container, Dialog, DialogContent, Avatar } from '@mui/
 import { CardContainer } from '../components/ui/CardContainer';
 import { useState, useEffect } from 'react';
 import { ScrollingLogos } from '../components/ui/ScrollingLogos';
+import { SuccessStoryCarousel } from '../components/ui/SuccessStoryCarousel';
 
 interface Startup {
   id: number;
@@ -155,9 +156,14 @@ const CurrentStartupsSection = ({ onStartupClick }: { onStartupClick: (startup: 
                           height: 80,
                           objectFit: 'cover',
                           borderRadius: '50%',
-                          marginBottom: 16
+                          marginBottom: 16,
+                          filter: 'grayscale(100%)',
+                          transition: 'filter 0.3s ease'
                         }}
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={{ 
+                          scale: 1.1,
+                          filter: 'grayscale(0%)'
+                        }}
                         transition={{ duration: 0.3 }}
                       />
                       <Typography 
@@ -321,9 +327,14 @@ const GraduatedStartupsSection = ({ onStartupClick }: { onStartupClick: (startup
                           height: 60,
                           objectFit: 'cover',
                           borderRadius: '50%',
-                          marginBottom: 12
+                          marginBottom: 12,
+                          filter: 'grayscale(100%)',
+                          transition: 'filter 0.3s ease'
                         }}
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={{ 
+                          scale: 1.1,
+                          filter: 'grayscale(0%)'
+                        }}
                         transition={{ duration: 0.3 }}
                       />
                       <Typography 
@@ -500,6 +511,79 @@ const StartupModal = ({ startup, open, onClose }: { startup: Startup | null, ope
   );
 };
 
+const SuccessStoriesSection = () => {
+  const successStories = [
+    {
+      id: 1,
+      title: 'Revolutionary Water Purification',
+      description: 'EcoTech Solutions developed an innovative water purification system that has provided clean water access to over 50,000 rural households across Tamil Nadu.',
+      image: '/public/asset/SuccessStoryimages/water.jpg',
+      sector: 'Environmental Technology',
+      impact: '50,000+ households served'
+    },
+    {
+      id: 2,
+      title: 'Smart Agriculture Platform',
+      description: 'AgriConnect created an IoT-based platform that has helped 10,000+ farmers increase their crop yields by 40% through data-driven farming techniques.',
+      image: '/public/asset/SuccessStoryimages/agriculture.jpg',
+      sector: 'AgriTech',
+      impact: '40% yield increase for farmers'
+    },
+    {
+      id: 3,
+      title: 'Rural Healthcare Innovation',
+      description: 'HealthTech Innovations launched AI-powered diagnostic tools that have improved healthcare access in 200+ rural health centers.',
+      image: '/public/asset/SuccessStoryimages/healthcare.png',
+      sector: 'HealthTech',
+      impact: '200+ health centers equipped'
+    },
+    {
+      id: 4,
+      title: 'Digital Financial Inclusion',
+      description: 'FinTech Solutions created a digital banking platform that has brought banking services to 25,000+ unbanked individuals in rural areas.',
+      image: '/public/asset/SuccessStoryimages/fintech.jpg',
+      sector: 'FinTech',
+      impact: '25,000+ people financially included'
+    },
+    {
+      id: 5,
+      title: 'Educational Technology Revolution',
+      description: 'EduTech Platform developed personalized learning solutions that have improved learning outcomes for 15,000+ students across Tamil Nadu.',
+      image: '/public/asset/SuccessStoryimages/education.jpg',
+      sector: 'EdTech',
+      impact: '15,000+ students impacted'
+    }
+  ];
+
+  return (
+    <Box sx={{ py: 8, backgroundColor: 'hsl(var(--accent))' }}>
+      <Container maxWidth="lg">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <Typography 
+            variant="h3" 
+            align="center"
+            sx={{ 
+              mb: 8,
+              color: 'hsl(var(--accent-foreground))',
+              fontFamily: 'Poppins, sans-serif',
+              fontWeight: 600,
+            }}
+          >
+            Success Stories
+          </Typography>
+          
+          <SuccessStoryCarousel stories={successStories} />
+        </motion.div>
+      </Container>
+    </Box>
+  );
+};
+
 export const Portfolio: React.FC = () => {
   const [selectedStartup, setSelectedStartup] = useState<Startup | null>(null);
 
@@ -528,6 +612,7 @@ export const Portfolio: React.FC = () => {
       
       <CurrentStartupsSection onStartupClick={setSelectedStartup} />
       <GraduatedStartupsSection onStartupClick={setSelectedStartup} />
+      <SuccessStoriesSection />
       
       <StartupModal 
         startup={selectedStartup}

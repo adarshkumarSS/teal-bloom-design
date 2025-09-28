@@ -356,7 +356,7 @@ const MapSection = () => {
             align="center"
             sx={{ 
               mb: 8,
-              color: 'hsl(var(--foreground))',
+              color: 'white',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 600,
             }}
