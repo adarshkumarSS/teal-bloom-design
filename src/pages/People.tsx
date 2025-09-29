@@ -165,10 +165,10 @@ const FounderSection = () => {
 
 const CEOSection = () => {
   const ceo = {
-    name: 'Dr. Priya Raman',
+    name: 'Mr. Vinoth Rajendran',
     position: 'Chief Executive Officer',
-    image: '/api/placeholder/250/300',
-    bio: 'Dynamic leader with expertise in startup ecosystems and innovation management. Dr. Raman leads TBI strategic initiatives and has been pivotal in the success of our incubation programs.',
+    image: '/asset/people/vinoth_rajendran.png',
+    bio: 'Dynamic leader with expertise in startup ecosystems and innovation management. Dr. Vinoth leads TBI strategic initiatives and has been pivotal in the success of our incubation programs.',
     experience: '15+ years',
     email: 'ceo@tbi.edu.in'
   };
