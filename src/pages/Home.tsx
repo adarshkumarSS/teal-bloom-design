@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Box, Typography, Container } from '@mui/material';
 import { CardContainer } from '../components/ui/CardContainer';
 import { Loader } from '../components/ui/Loader';
-import { ImageSlider } from '../components/ui/ImageSlider';
+import { SuccessStoryCarousel } from '../components/ui/SuccessStoryCarousel';
 import { DarkButton } from '../components/ui/DarkButton';
 
 const HeroSection = () => (
@@ -413,56 +413,73 @@ const PartnersSection = () => {
 export default PartnersSection;
 
 const SuccessStoriesSection = () => {
-  const stories = [
+  const successStories = [
     {
       id: 1,
-      src: '/asset/SuccessStoryimages/water.jpg',
-      title: 'EcoTech Solutions',
-      description: 'Sustainable technology for water purification'
+      title: 'Revolutionary Water Purification',
+      description: 'EcoTech Solutions developed an innovative water purification system that has provided clean water access to over 50,000 rural households across Tamil Nadu.',
+      image: '/asset/SuccessStoryimages/water.jpg',
+      sector: 'Environmental Technology',
+      impact: '50,000+ households served'
     },
     {
       id: 2,
-      src: '/asset/SuccessStoryimages/agriculture.jpg',
-      title: 'AgriConnect',
-      description: 'Connecting farmers with technology'
+      title: 'Smart Agriculture Platform',
+      description: 'AgriConnect created an IoT-based platform that has helped 10,000+ farmers increase their crop yields by 40% through data-driven farming techniques.',
+      image: '/asset/SuccessStoryimages/agriculture.jpg',
+      sector: 'AgriTech',
+      impact: '40% yield increase for farmers'
     },
     {
       id: 3,
-      src: '/asset/SuccessStoryimages/healthcare.png',
-      title: 'HealthTech Innovations',
-      description: 'Revolutionary healthcare solutions'
+      title: 'Rural Healthcare Innovation',
+      description: 'HealthTech Innovations launched AI-powered diagnostic tools that have improved healthcare access in 200+ rural health centers.',
+      image: '/asset/SuccessStoryimages/healthcare.png',
+      sector: 'HealthTech',
+      impact: '200+ health centers equipped'
     },
     {
       id: 4,
-      src: '/asset/SuccessStoryimages/education.jpg',
-      title: 'EduTech Platform',
-      description: 'Transforming education through technology'
+      title: 'Digital Financial Inclusion',
+      description: 'FinTech Solutions created a digital banking platform that has brought banking services to 25,000+ unbanked individuals in rural areas.',
+      image: '/asset/SuccessStoryimages/fintech.jpg',
+      sector: 'FinTech',
+      impact: '25,000+ people financially included'
     },
     {
       id: 5,
-      src: '/asset/SuccessStoryimages/fintech.jpg',
-      title: 'FinTech Solutions',
-      description: 'Financial inclusion through innovation'
-    },
+      title: 'Educational Technology Revolution',
+      description: 'EduTech Platform developed personalized learning solutions that have improved learning outcomes for 15,000+ students across Tamil Nadu.',
+      image: '/asset/SuccessStoryimages/education.jpg',
+      sector: 'EdTech',
+      impact: '15,000+ students impacted'
+    }
   ];
 
   return (
-    <Box sx={{ py: 8, backgroundColor: 'hsl(var(--muted))' }}>
+    <Box sx={{ py: 8, backgroundColor: 'hsl(var(--accent))' }}>
       <Container maxWidth="lg">
-        <Typography
-          variant="h3"
-          align="center"
-          sx={{
-            mb: 6,
-            color: 'hsl(var(--foreground))',
-            fontFamily: 'Poppins, sans-serif',
-            fontWeight: 600,
-          }}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
         >
-          Success Stories
-        </Typography>
-
-        <ImageSlider images={stories} />
+          <Typography 
+            variant="h3" 
+            align="center"
+            sx={{ 
+              mb: 8,
+              color: 'hsl(var(--accent-foreground))',
+              fontFamily: 'Poppins, sans-serif',
+              fontWeight: 600,
+            }}
+          >
+            Success Stories
+          </Typography>
+          
+          <SuccessStoryCarousel stories={successStories} />
+        </motion.div>
       </Container>
     </Box>
   );

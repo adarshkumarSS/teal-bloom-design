@@ -340,8 +340,7 @@ const MapSection = () => {
     <Box 
       sx={{ 
         py: 8,
-        backgroundColor: 'hsl(var(--steel-teal))',
-        color: 'white',
+        backgroundColor: 'hsl(var(--accent))',
       }}
     >
       <Container maxWidth="lg">
@@ -356,12 +355,12 @@ const MapSection = () => {
             align="center"
             sx={{ 
               mb: 8,
-              color: 'hsl(var(--background))',
+              color: 'hsl(var(--accent-foreground))',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 600,
             }}
           >
-            Find Us Here
+            <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>Find</Box> Us Here
           </Typography>
           
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 6 }}>
@@ -370,18 +369,18 @@ const MapSection = () => {
                 sx={{
                   width: '100%',
                   height: 400,
-                  backgroundColor: 'rgba(255,255,255,0.1)',
+                  backgroundColor: 'hsl(var(--card))',
                   borderRadius: 'var(--radius)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '2px solid rgba(255,255,255,0.2)',
+                  border: '2px solid hsl(var(--border))',
                 }}
               >
                 <Typography 
                   variant="h6" 
                   sx={{ 
-                    color: 'hsl(var(--background))',
+                    color: 'hsl(var(--muted-foreground))',
                     fontFamily: 'Poppins, sans-serif',
                   }}
                 >
@@ -391,25 +390,61 @@ const MapSection = () => {
             </Box>
             
             <Box sx={{ flex: 1 }}>
-              <CardContainer className="bg-white/10 border border-white/20">
-                <Typography 
-                  variant="h5" 
-                  sx={{ 
-                    mb: 4,
-                    color: 'hsl(var(--background))',
-                    fontFamily: 'Poppins, sans-serif',
-                    fontWeight: 600,
-                  }}
-                >
-                  Quick Contact
-                </Typography>
+              <CardContainer>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 4, mb: 4 }}>
+                  <Box 
+                    sx={{
+                      width: 60,
+                      height: 60,
+                      borderRadius: '50%',
+                      backgroundColor: 'hsl(var(--destructive))',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Typography 
+                      variant="h6"
+                      sx={{ 
+                        color: 'white',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontWeight: 600,
+                      }}
+                    >
+                      📞
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography 
+                      variant="h6"
+                      sx={{
+                        color: 'hsl(var(--foreground))',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontWeight: 600,
+                        mb: 1,
+                      }}
+                    >
+                      <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>Quick</Box> Contact
+                    </Typography>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        color: 'hsl(var(--muted-foreground))',
+                        fontFamily: 'Poppins, sans-serif',
+                      }}
+                    >
+                      Reach out to us for immediate assistance
+                    </Typography>
+                  </Box>
+                </Box>
                 
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                   <Box>
                     <Typography 
                       variant="h6" 
                       sx={{ 
-                        color: 'hsl(var(--beau-blue))',
+                        color: 'hsl(var(--destructive))',
                         fontFamily: 'Poppins, sans-serif',
                         fontWeight: 600,
                         mb: 1,
@@ -420,7 +455,7 @@ const MapSection = () => {
                     <Typography 
                       variant="body1" 
                       sx={{ 
-                        color: 'hsl(var(--background))',
+                        color: 'hsl(var(--foreground))',
                         fontFamily: 'Poppins, sans-serif',
                         lineHeight: 1.6,
                       }}
@@ -436,7 +471,7 @@ const MapSection = () => {
                     <Typography 
                       variant="h6" 
                       sx={{ 
-                        color: 'hsl(var(--beau-blue))',
+                        color: 'hsl(var(--destructive))',
                         fontFamily: 'Poppins, sans-serif',
                         fontWeight: 600,
                         mb: 1,
@@ -447,7 +482,7 @@ const MapSection = () => {
                     <Typography 
                       variant="body1" 
                       sx={{ 
-                        color: 'hsl(var(--background))',
+                        color: 'hsl(var(--foreground))',
                         fontFamily: 'Poppins, sans-serif',
                         lineHeight: 1.6,
                       }}
@@ -486,7 +521,7 @@ export const Contact: React.FC = () => {
               fontWeight: 600,
             }}
           >
-            Contact Us
+            <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>Contact</Box> Us
           </Typography>
         </motion.div>
       </Container>
