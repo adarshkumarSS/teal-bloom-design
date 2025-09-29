@@ -1,37 +1,30 @@
 import { motion } from 'framer-motion';
-import { Box, Container, Grid, Typography, TextField, Button } from '@mui/material';
-import { CardContainer } from '@/components/ui/CardContainer';
-import { useState, useEffect } from 'react';
-import { toast } from 'sonner';
-import { HashLoader } from '@/components/ui/HashLoader';
-
-interface ContactFormData {
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  message: string;
-}
+import { Box, Typography, Container } from '@mui/material';
+import { CardContainer } from '../components/ui/CardContainer';
+import { OutlinedTextField } from '../components/ui/OutlinedTextField';
+import { DarkButton } from '../components/ui/DarkButton';
+import { useState } from 'react';
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState<ContactFormData>({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    company: '',
+    subject: '',
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+  const handleChange = (field: string) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: event.target.value
+    }));
   };
 
-  const handleChange = (field: keyof ContactFormData) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData(prev => ({ ...prev, [field]: e.target.value }));
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    // Handle form submission
+    console.log('Form submitted:', formData);
   };
 
   return (
@@ -51,180 +44,60 @@ const ContactForm = () => {
             fontWeight: 600,
           }}
         >
-          Send us a Message
+          Get in Touch
         </Typography>
         
         <form onSubmit={handleSubmit}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            <TextField
-              label="Full Name"
-              value={formData.name}
-              onChange={handleChange('name')}
-              required
-              fullWidth
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  backgroundColor: 'hsl(var(--card))',
-                  '& fieldset': {
-                    borderColor: 'hsl(var(--border))',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'hsl(var(--primary))',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'hsl(var(--primary))',
-                  }
-                },
-                '& .MuiInputLabel-root': {
-                  color: 'hsl(var(--muted-foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                },
-                '& .MuiOutlinedInput-input': {
-                  color: 'hsl(var(--foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                }
-              }}
-            />
+            <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
+              <OutlinedTextField
+                label="Full Name"
+                value={formData.name}
+                onChange={handleChange('name')}
+                required
+                fullWidth
+              />
+              <OutlinedTextField
+                label="Email Address"
+                type="email"
+                value={formData.email}
+                onChange={handleChange('email')}
+                required
+                fullWidth
+              />
+            </Box>
             
-            <TextField
-              label="Email Address"
-              type="email"
-              value={formData.email}
-              onChange={handleChange('email')}
-              required
-              fullWidth
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  backgroundColor: 'hsl(var(--card))',
-                  '& fieldset': {
-                    borderColor: 'hsl(var(--border))',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'hsl(var(--primary))',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'hsl(var(--primary))',
-                  }
-                },
-                '& .MuiInputLabel-root': {
-                  color: 'hsl(var(--muted-foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                },
-                '& .MuiOutlinedInput-input': {
-                  color: 'hsl(var(--foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                }
-              }}
-            />
+            <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
+              <OutlinedTextField
+                label="Phone Number"
+                value={formData.phone}
+                onChange={handleChange('phone')}
+                fullWidth
+              />
+              <OutlinedTextField
+                label="Subject"
+                value={formData.subject}
+                onChange={handleChange('subject')}
+                required
+                fullWidth
+              />
+            </Box>
             
-            <TextField
-              label="Phone Number"
-              value={formData.phone}
-              onChange={handleChange('phone')}
-              fullWidth
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  backgroundColor: 'hsl(var(--card))',
-                  '& fieldset': {
-                    borderColor: 'hsl(var(--border))',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'hsl(var(--primary))',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'hsl(var(--primary))',
-                  }
-                },
-                '& .MuiInputLabel-root': {
-                  color: 'hsl(var(--muted-foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                },
-                '& .MuiOutlinedInput-input': {
-                  color: 'hsl(var(--foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                }
-              }}
-            />
-            
-            <TextField
-              label="Company/Organization"
-              value={formData.company}
-              onChange={handleChange('company')}
-              fullWidth
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  backgroundColor: 'hsl(var(--card))',
-                  '& fieldset': {
-                    borderColor: 'hsl(var(--border))',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'hsl(var(--primary))',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'hsl(var(--primary))',
-                  }
-                },
-                '& .MuiInputLabel-root': {
-                  color: 'hsl(var(--muted-foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                },
-                '& .MuiOutlinedInput-input': {
-                  color: 'hsl(var(--foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                }
-              }}
-            />
-            
-            <TextField
+            <OutlinedTextField
               label="Message"
+              multiline
+              rows={4}
               value={formData.message}
               onChange={handleChange('message')}
               required
-              multiline
-              rows={4}
               fullWidth
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  backgroundColor: 'hsl(var(--card))',
-                  '& fieldset': {
-                    borderColor: 'hsl(var(--border))',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'hsl(var(--primary))',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'hsl(var(--primary))',
-                  }
-                },
-                '& .MuiInputLabel-root': {
-                  color: 'hsl(var(--muted-foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                },
-                '& .MuiOutlinedInput-input': {
-                  color: 'hsl(var(--foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                }
-              }}
             />
             
-            <Button
-              type="submit"
-              variant="contained"
-              size="large"
-              sx={{
-                backgroundColor: 'hsl(var(--primary))',
-                color: 'hsl(var(--primary-foreground))',
-                fontFamily: 'Poppins, sans-serif',
-                fontWeight: 600,
-                py: 1.5,
-                borderRadius: 'var(--radius)',
-                '&:hover': {
-                  backgroundColor: 'hsl(var(--primary) / 0.9)',
-                }
-              }}
-            >
-              Send Message
-            </Button>
+            <Box sx={{ mt: 2 }}>
+              <DarkButton type="submit" size="large" fullWidth>
+                Send Message
+              </DarkButton>
+            </Box>
           </Box>
         </form>
       </CardContainer>
@@ -340,35 +213,43 @@ const CEOInfo = () => {
               fontWeight: 600,
             }}
           >
-            Leadership
+            Leadership Contact
           </Typography>
           
-          <CardContainer>
-            <Grid container spacing={4} alignItems="center">
-              <Grid item xs={12} md={4}>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                >
-                  <Box
-                    component="img"
-                    src={ceoInfo.image}
-                    alt={ceoInfo.name}
-                    sx={{
-                      width: '100%',
-                      height: 300,
-                      objectFit: 'cover',
-                      borderRadius: 'var(--radius)',
-                    }}
-                  />
-                </motion.div>
-              </Grid>
-              
-              <Grid item xs={12} md={8}>
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 6, alignItems: 'center' }}>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <motion.img
+                src={ceoInfo.image}
+                alt={ceoInfo.name}
+                style={{
+                  width: 300,
+                  height: 360,
+                  objectFit: 'cover',
+                  borderRadius: 'var(--radius)',
+                  boxShadow: 'var(--shadow-elegant)'
+                }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              style={{ flex: 1 }}
+            >
+              <CardContainer>
                 <Typography 
                   variant="h4" 
                   sx={{ 
-                    mb: 1,
+                    mb: 2,
                     color: 'hsl(var(--foreground))',
                     fontFamily: 'Poppins, sans-serif',
                     fontWeight: 600,
@@ -376,7 +257,6 @@ const CEOInfo = () => {
                 >
                   {ceoInfo.name}
                 </Typography>
-                
                 <Typography 
                   variant="h6" 
                   sx={{ 
@@ -388,7 +268,6 @@ const CEOInfo = () => {
                 >
                   {ceoInfo.position}
                 </Typography>
-                
                 <Typography 
                   variant="body1" 
                   sx={{ 
@@ -401,31 +280,55 @@ const CEOInfo = () => {
                   {ceoInfo.bio}
                 </Typography>
                 
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                  <Typography 
-                    variant="body2" 
-                    sx={{ 
-                      color: 'hsl(var(--primary))',
-                      fontFamily: 'Poppins, sans-serif',
-                      fontWeight: 500,
-                    }}
-                  >
-                    📧 {ceoInfo.email}
-                  </Typography>
-                  <Typography 
-                    variant="body2" 
-                    sx={{ 
-                      color: 'hsl(var(--primary))',
-                      fontFamily: 'Poppins, sans-serif',
-                      fontWeight: 500,
-                    }}
-                  >
-                    📞 {ceoInfo.phone}
-                  </Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <Box>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        color: 'hsl(var(--muted-foreground))',
+                        fontFamily: 'Poppins, sans-serif',
+                        mb: 0.5,
+                      }}
+                    >
+                      Email
+                    </Typography>
+                    <Typography 
+                      variant="body1" 
+                      sx={{ 
+                        color: 'hsl(var(--primary))',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {ceoInfo.email}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        color: 'hsl(var(--muted-foreground))',
+                        fontFamily: 'Poppins, sans-serif',
+                        mb: 0.5,
+                      }}
+                    >
+                      Direct Phone
+                    </Typography>
+                    <Typography 
+                      variant="body1" 
+                      sx={{ 
+                        color: 'hsl(var(--primary))',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {ceoInfo.phone}
+                    </Typography>
+                  </Box>
                 </Box>
-              </Grid>
-            </Grid>
-          </CardContainer>
+              </CardContainer>
+            </motion.div>
+          </Box>
         </motion.div>
       </Container>
     </Box>
@@ -434,7 +337,12 @@ const CEOInfo = () => {
 
 const MapSection = () => {
   return (
-    <Box sx={{ py: 8, backgroundColor: 'hsl(var(--background))' }}>
+    <Box 
+      sx={{ 
+        py: 8,
+        backgroundColor: 'hsl(var(--accent))',
+      }}
+    >
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -446,125 +354,148 @@ const MapSection = () => {
             variant="h3" 
             align="center"
             sx={{ 
-              mb: 2,
-              color: 'hsl(var(--foreground))',
+              mb: 8,
+              color: 'hsl(var(--accent-foreground))',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 600,
             }}
           >
-            Find Us Here
-          </Typography>
-          <Typography 
-            variant="h6" 
-            align="center"
-            sx={{ 
-              mb: 6,
-              color: 'hsl(var(--primary))',
-              fontFamily: 'Poppins, sans-serif',
-              maxWidth: '600px',
-              mx: 'auto',
-              fontWeight: 500,
-            }}
-          >
-            Visit our state-of-the-art facility and experience innovation firsthand
+            <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>Find</Box> Us Here
           </Typography>
           
-          <Grid container spacing={4}>
-            <Grid item xs={12} md={8}>
-              <CardContainer>
-                <Box
-                  component="iframe"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.0419847794284!2d78.1167!3d9.9252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00c5c1a7c7c7c7%3A0x1c7c7c7c7c7c7c7c!2sThiagarajar%20College%20of%20Engineering!5e0!3m2!1sen!2sin!4v1234567890"
-                  sx={{
-                    width: '100%',
-                    height: 400,
-                    border: 0,
-                    borderRadius: 'var(--radius)',
-                  }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </CardContainer>
-            </Grid>
-            
-            <Grid item xs={12} md={4}>
-              <Typography 
-                variant="h6" 
-                sx={{ 
-                  mb: 2,
-                  color: 'hsl(var(--foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                  fontWeight: 600,
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 6 }}>
+            <Box sx={{ flex: 1 }}>
+              <Box
+                sx={{
+                  width: '100%',
+                  height: 400,
+                  backgroundColor: 'hsl(var(--card))',
+                  borderRadius: 'var(--radius)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '2px solid hsl(var(--border))',
                 }}
               >
-                Our Location
-              </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  mb: 3,
-                  color: 'hsl(var(--foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                  lineHeight: 1.6,
-                  opacity: 0.8,
-                }}
-              >
-                Located in the heart of Madurai, our incubation center is easily accessible and provides the perfect environment for innovation and collaboration.
-              </Typography>
-              
-              <Box sx={{ mb: 3 }}>
                 <Typography 
-                  variant="body2" 
+                  variant="h6" 
                   sx={{ 
-                    color: 'hsl(var(--primary))',
-                    fontFamily: 'Poppins, sans-serif',
-                    fontWeight: 600,
-                    mb: 1,
-                  }}
-                >
-                  Quick Contact
-                </Typography>
-                <Typography 
-                  variant="body1" 
-                  sx={{ 
-                    color: 'hsl(var(--foreground))',
+                    color: 'hsl(var(--muted-foreground))',
                     fontFamily: 'Poppins, sans-serif',
                   }}
                 >
-                  📞 +91 452 2482240
-                </Typography>
-                <Typography 
-                  variant="body1" 
-                  sx={{ 
-                    color: 'hsl(var(--foreground))',
-                    fontFamily: 'Poppins, sans-serif',
-                  }}
-                >
-                  📧 info@tbi.edu.in
+                  Google Maps Integration
                 </Typography>
               </Box>
-              
-              <Button
-                variant="contained"
-                fullWidth
-                sx={{
-                  backgroundColor: 'hsl(var(--primary))',
-                  color: 'hsl(var(--primary-foreground))',
-                  fontFamily: 'Poppins, sans-serif',
-                  fontWeight: 500,
-                  py: 1.5,
-                  borderRadius: 'var(--radius)',
-                  '&:hover': {
-                    backgroundColor: 'hsl(var(--primary) / 0.9)',
-                  }
-                }}
-                onClick={() => window.open('https://maps.google.com', '_blank')}
-              >
-                Get Directions
-              </Button>
-            </Grid>
-          </Grid>
+            </Box>
+            
+            <Box sx={{ flex: 1 }}>
+              <CardContainer>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 4, mb: 4 }}>
+                  <Box 
+                    sx={{
+                      width: 60,
+                      height: 60,
+                      borderRadius: '50%',
+                      backgroundColor: 'hsl(var(--destructive))',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Typography 
+                      variant="h6"
+                      sx={{ 
+                        color: 'white',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontWeight: 600,
+                      }}
+                    >
+                      📞
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography 
+                      variant="h6"
+                      sx={{
+                        color: 'hsl(var(--foreground))',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontWeight: 600,
+                        mb: 1,
+                      }}
+                    >
+                      <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>Quick</Box> Contact
+                    </Typography>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        color: 'hsl(var(--muted-foreground))',
+                        fontFamily: 'Poppins, sans-serif',
+                      }}
+                    >
+                      Reach out to us for immediate assistance
+                    </Typography>
+                  </Box>
+                </Box>
+                
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  <Box>
+                    <Typography 
+                      variant="h6" 
+                      sx={{ 
+                        color: 'hsl(var(--destructive))',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontWeight: 600,
+                        mb: 1,
+                      }}
+                    >
+                      Office Address
+                    </Typography>
+                    <Typography 
+                      variant="body1" 
+                      sx={{ 
+                        color: 'hsl(var(--foreground))',
+                        fontFamily: 'Poppins, sans-serif',
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      Thiagarajar Business Incubation Centre<br />
+                      Thiagarajar College of Engineering<br />
+                      Madurai - 625015<br />
+                      Tamil Nadu, India
+                    </Typography>
+                  </Box>
+                  
+                  <Box>
+                    <Typography 
+                      variant="h6" 
+                      sx={{ 
+                        color: 'hsl(var(--destructive))',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontWeight: 600,
+                        mb: 1,
+                      }}
+                    >
+                      Contact Details
+                    </Typography>
+                    <Typography 
+                      variant="body1" 
+                      sx={{ 
+                        color: 'hsl(var(--foreground))',
+                        fontFamily: 'Poppins, sans-serif',
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      Phone: +91 452 2482240<br />
+                      Email: info@tbi.edu.in<br />
+                      Website: www.tbi.edu.in
+                    </Typography>
+                  </Box>
+                </Box>
+              </CardContainer>
+            </Box>
+          </Box>
         </motion.div>
       </Container>
     </Box>
@@ -572,61 +503,46 @@ const MapSection = () => {
 };
 
 export const Contact: React.FC = () => {
-  const [showLoader, setShowLoader] = useState(true);
-
   return (
-    <>
-      {showLoader && (
-        <HashLoader onComplete={() => setShowLoader(false)} duration={2500} />
-      )}
-      <Box sx={{ py: { xs: 4, md: 8 } }}>
-        <Container maxWidth="lg">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+    <Box sx={{ pt: 16, minHeight: '100vh', backgroundColor: 'hsl(var(--background))' }}>
+      <Container maxWidth="lg">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <Typography 
+            variant="h2" 
+            align="center" 
+            sx={{ 
+              mb: 8,
+              color: 'hsl(var(--foreground))',
+              fontFamily: 'Poppins, sans-serif',
+              fontWeight: 600,
+            }}
           >
-            <Typography 
-              variant="h2" 
-              align="center"
-              sx={{ 
-                mb: 2,
-                color: 'hsl(var(--foreground))',
-                fontFamily: 'Poppins, sans-serif',
-                fontWeight: 600,
-              }}
-            >
-              Get in Touch
-            </Typography>
-            <Typography 
-              variant="h6" 
-              align="center"
-              sx={{ 
-                mb: 8,
-                color: 'hsl(var(--primary))',
-                fontFamily: 'Poppins, sans-serif',
-                maxWidth: '600px',
-                mx: 'auto',
-                fontWeight: 500,
-              }}
-            >
-              Ready to transform your innovative idea into a successful venture? Let's connect and explore the possibilities together.
-            </Typography>
-          </motion.div>
-
-          <Grid container spacing={4} sx={{ mb: 8 }}>
-            <Grid item xs={12} md={6}>
-              <ContactForm />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <ContactInfo />
-            </Grid>
-          </Grid>
-        </Container>
-        
-        <CEOInfo />
-        <MapSection />
-      </Box>
-    </>
+            <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>Contact</Box> Us
+          </Typography>
+        </motion.div>
+      </Container>
+      
+      <Container maxWidth="lg" sx={{ pb: 8 }}>
+        <Box sx={{ 
+          display: 'grid', 
+          gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, 
+          gap: 6 
+        }}>
+          <Box>
+            <ContactForm />
+          </Box>
+          <Box>
+            <ContactInfo />
+          </Box>
+        </Box>
+      </Container>
+      
+      <CEOInfo />
+      <MapSection />
+    </Box>
   );
 };
