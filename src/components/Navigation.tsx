@@ -169,14 +169,16 @@ export const Navigation: React.FC = () => {
             >
               {isDarkMode ? <LightMode /> : <DarkMode />}
             </IconButton>
-            <DarkButton
-              startIcon={<Login />}
-              sx={{
-                color: "#fff",
-              }}
-            >
-              Login
-            </DarkButton>
+            <Link to="/auth" style={{ textDecoration: 'none' }}>
+              <DarkButton
+                startIcon={<Login />}
+                sx={{
+                  color: "#fff",
+                }}
+              >
+                Login
+              </DarkButton>
+            </Link>
           </Box>
         </Toolbar>
       </StyledAppBar>

@@ -14,6 +14,8 @@ import { Program } from "./pages/Program";
 import { Media } from "./pages/Media";
 import { Blogs } from "./pages/Blogs";
 import { Contact } from "./pages/Contact";
+import { Auth } from "./pages/Auth";
+import { ApplyIncubation } from "./pages/ApplyIncubation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,6 +47,8 @@ const App = () => (
             <Route path="/media" element={<Media />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/apply-incubation" element={<ApplyIncubation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
