@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Box, Container, Typography, TextField, Button, IconButton, InputAdornment, Divider } from '@mui/material';
 import { Visibility, VisibilityOff, Google, LinkedIn } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -85,6 +85,7 @@ const SocialButton = styled(Button)({
 });
 
 export const Auth = () => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -141,8 +142,8 @@ export const Auth = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
     console.log('Form submitted', formData);
+    navigate('/admin');
   };
 
   return (

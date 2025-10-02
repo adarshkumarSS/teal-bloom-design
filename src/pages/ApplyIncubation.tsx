@@ -13,7 +13,6 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
-  Grid,
   Paper,
   Avatar,
   IconButton,
@@ -240,281 +239,38 @@ export const ApplyIncubation = () => {
 
               {/* Business Information */}
               <SectionTitle>Business Information</SectionTitle>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <StyledTextField
-                    fullWidth
-                    label="Name of Business *"
-                    value={formData.businessName}
-                    onChange={(e) =>
-                      setFormData({ ...formData, businessName: e.target.value })
-                    }
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                <StyledTextField
+                  fullWidth
+                  label="Name of Business *"
+                  value={formData.businessName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, businessName: e.target.value })
+                  }
+                  required
+                />
+                <Box>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      fontFamily: "Poppins, sans-serif",
+                      color: "hsl(var(--foreground))",
+                      mb: 1,
+                      fontWeight: 600,
+                    }}
+                  >
+                    Lead Entrepreneur Resume
+                  </Typography>
                   <input
-                    accept=".pdf,.doc,.docx"
-                    style={{ display: 'none' }}
-                    id="resume-upload"
                     type="file"
+                    accept=".pdf,.doc,.docx"
+                    style={{
+                      fontFamily: "Poppins, sans-serif",
+                      color: "hsl(var(--foreground))",
+                    }}
                   />
-                  <label htmlFor="resume-upload" style={{ width: '100%' }}>
-                    <UploadBox sx={{ width: '100%', justifyContent: 'center' }}>
-                      <CloudUpload />
-                      Upload Lead Entrepreneur Resume
-                    </UploadBox>
-                  </label>
-                </Grid>
-              </Grid>
-
-              {/* Personal Information */}
-              <SectionTitle>Lead Entrepreneur Details</SectionTitle>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={2}>
-                  <FormControl fullWidth>
-                    <InputLabel>Salutation</InputLabel>
-                    <Select
-                      value={formData.salutation}
-                      label="Salutation"
-                      onChange={(e) =>
-                        setFormData({ ...formData, salutation: e.target.value })
-                      }
-                    >
-                      <MenuItem value="Mr">Mr</MenuItem>
-                      <MenuItem value="Mrs">Mrs</MenuItem>
-                      <MenuItem value="Dr">Dr</MenuItem>
-                      <MenuItem value="Prof">Prof</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={10}>
-                  <StyledTextField
-                    fullWidth
-                    label="Full Name"
-                    value={formData.fullName}
-                    onChange={(e) =>
-                      setFormData({ ...formData, fullName: e.target.value })
-                    }
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <StyledTextField
-                    fullWidth
-                    label="Father Name"
-                    value={formData.fatherName}
-                    onChange={(e) =>
-                      setFormData({ ...formData, fatherName: e.target.value })
-                    }
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <StyledTextField
-                    fullWidth
-                    label="Age"
-                    type="number"
-                    value={formData.age}
-                    onChange={(e) =>
-                      setFormData({ ...formData, age: e.target.value })
-                    }
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <StyledTextField
-                    fullWidth
-                    label="Email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <StyledTextField
-                    fullWidth
-                    label="Residential Mobile"
-                    value={formData.resMobile}
-                    onChange={(e) =>
-                      setFormData({ ...formData, resMobile: e.target.value })
-                    }
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <StyledTextField
-                    fullWidth
-                    label="Office Mobile"
-                    value={formData.offMobile}
-                    onChange={(e) =>
-                      setFormData({ ...formData, offMobile: e.target.value })
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <StyledTextField
-                    fullWidth
-                    label="Postal / Residential Address"
-                    multiline
-                    rows={2}
-                    value={formData.address}
-                    onChange={(e) =>
-                      setFormData({ ...formData, address: e.target.value })
-                    }
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <StyledTextField
-                    fullWidth
-                    label="City"
-                    value={formData.city}
-                    onChange={(e) =>
-                      setFormData({ ...formData, city: e.target.value })
-                    }
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <StyledTextField
-                    fullWidth
-                    label="State"
-                    value={formData.state}
-                    onChange={(e) =>
-                      setFormData({ ...formData, state: e.target.value })
-                    }
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <StyledTextField
-                    fullWidth
-                    label="Post"
-                    value={formData.post}
-                    onChange={(e) =>
-                      setFormData({ ...formData, post: e.target.value })
-                    }
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <StyledTextField
-                    fullWidth
-                    label="Country"
-                    value={formData.country}
-                    onChange={(e) =>
-                      setFormData({ ...formData, country: e.target.value })
-                    }
-                    required
-                  />
-                </Grid>
-              </Grid>
-
-              {/* About Business */}
-              <SectionTitle>About Business</SectionTitle>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
-                  <FormControl fullWidth>
-                    <InputLabel>Type of Business</InputLabel>
-                    <Select
-                      value={formData.businessType}
-                      label="Type of Business"
-                      onChange={(e) =>
-                        setFormData({ ...formData, businessType: e.target.value })
-                      }
-                    >
-                      <MenuItem value="Services">Services</MenuItem>
-                      <MenuItem value="High Technology">High Technology</MenuItem>
-                      <MenuItem value="Other">Other</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <FormControl fullWidth>
-                    <InputLabel>Legal Entity</InputLabel>
-                    <Select
-                      value={formData.legalEntity}
-                      label="Legal Entity"
-                      onChange={(e) =>
-                        setFormData({ ...formData, legalEntity: e.target.value })
-                      }
-                    >
-                      <MenuItem value="Proprietorship">Proprietorship</MenuItem>
-                      <MenuItem value="Partnership">Partnership</MenuItem>
-                      <MenuItem value="Corporation">Corporation</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                  <StyledTextField
-                    fullWidth
-                    label="Briefly describe your business"
-                    multiline
-                    rows={4}
-                    value={formData.businessDescription}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        businessDescription: e.target.value,
-                      })
-                    }
-                    required
-                  />
-                </Grid>
-              </Grid>
-
-              {/* Services Expected */}
-              <SectionTitle>Services Expected from TCE-TBI</SectionTitle>
-              <FormGroup>
-                <Grid container spacing={2}>
-                  {Object.keys(formData.services).map((service) => (
-                    <Grid item xs={12} sm={6} md={4} key={service}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={
-                              formData.services[
-                                service as keyof typeof formData.services
-                              ]
-                            }
-                            onChange={(e) =>
-                              setFormData({
-                                ...formData,
-                                services: {
-                                  ...formData.services,
-                                  [service]: e.target.checked,
-                                },
-                              })
-                            }
-                          />
-                        }
-                        label={
-                          service.charAt(0).toUpperCase() +
-                          service.slice(1).replace(/([A-Z])/g, ' $1')
-                        }
-                      />
-                    </Grid>
-                  ))}
-                </Grid>
-              </FormGroup>
-
-              <Grid container spacing={3} sx={{ mt: 2 }}>
-                <Grid item xs={12} sm={4}>
-                  <StyledTextField
-                    fullWidth
-                    label="Number of Chairs"
-                    type="number"
-                    value={formData.numChairs}
-                    onChange={(e) =>
-                      setFormData({ ...formData, numChairs: e.target.value })
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
+                </Box>
+                <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' }, gap: 3 }}>
                   <StyledTextField
                     fullWidth
                     label="Full-time Employees"
@@ -524,8 +280,6 @@ export const ApplyIncubation = () => {
                       setFormData({ ...formData, fullTimeEmployees: e.target.value })
                     }
                   />
-                </Grid>
-                <Grid item xs={12} sm={4}>
                   <StyledTextField
                     fullWidth
                     label="Part-time Employees"
@@ -535,8 +289,6 @@ export const ApplyIncubation = () => {
                       setFormData({ ...formData, partTimeEmployees: e.target.value })
                     }
                   />
-                </Grid>
-                <Grid item xs={12} sm={4}>
                   <StyledTextField
                     fullWidth
                     label="Consultants"
@@ -546,8 +298,8 @@ export const ApplyIncubation = () => {
                       setFormData({ ...formData, consultants: e.target.value })
                     }
                   />
-                </Grid>
-              </Grid>
+                </Box>
+              </Box>
 
               {/* References */}
               <SectionTitle>References</SectionTitle>
@@ -561,8 +313,8 @@ export const ApplyIncubation = () => {
                 Give two references here, verification will be done after completion
                 of the selection process
               </Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                <Box>
                   <Typography
                     sx={{
                       fontFamily: 'Poppins, sans-serif',
@@ -574,7 +326,7 @@ export const ApplyIncubation = () => {
                     Reference 01
                   </Typography>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <StyledTextField
                     fullWidth
                     label="Name"
@@ -585,7 +337,7 @@ export const ApplyIncubation = () => {
                     required
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <StyledTextField
                     fullWidth
                     label="Mobile"
@@ -596,7 +348,7 @@ export const ApplyIncubation = () => {
                     required
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <StyledTextField
                     fullWidth
                     label="Email"
@@ -608,7 +360,7 @@ export const ApplyIncubation = () => {
                     required
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <StyledTextField
                     fullWidth
                     label="Address"
@@ -620,7 +372,7 @@ export const ApplyIncubation = () => {
                   />
                 </Grid>
 
-                <Grid item xs={12} sx={{ mt: 2 }}>
+                <Grid xs={12} sx={{ mt: 2 }}>
                   <Typography
                     sx={{
                       fontFamily: 'Poppins, sans-serif',
@@ -632,7 +384,7 @@ export const ApplyIncubation = () => {
                     Reference 02
                   </Typography>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <StyledTextField
                     fullWidth
                     label="Name"
@@ -643,7 +395,7 @@ export const ApplyIncubation = () => {
                     required
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <StyledTextField
                     fullWidth
                     label="Mobile"
@@ -654,7 +406,7 @@ export const ApplyIncubation = () => {
                     required
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <StyledTextField
                     fullWidth
                     label="Email"
@@ -666,7 +418,7 @@ export const ApplyIncubation = () => {
                     required
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid xs={12} sm={6}>
                   <StyledTextField
                     fullWidth
                     label="Address"
