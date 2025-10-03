@@ -340,7 +340,7 @@ export const Program: React.FC = () => {
               fontWeight: 600,
             }}
           >
-            Our Programs
+            <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>Our </Box>  Programs
           </Typography>
           
           {/* Search Bar */}

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, IconButton } from '@mui/material';
 import { CardContainer } from './CardContainer';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
@@ -76,7 +76,7 @@ export const SuccessStoryCarousel: React.FC<SuccessStoryCarouselProps> = ({ stor
                       variant="h4"
                       sx={{
                         mb: 2,
-                        color: 'hsl(var(--foreground))',
+                        color: 'white',
                         fontFamily: 'Poppins, sans-serif',
                         fontWeight: 600,
                       }}
@@ -87,7 +87,7 @@ export const SuccessStoryCarousel: React.FC<SuccessStoryCarouselProps> = ({ stor
                       variant="h6"
                       sx={{
                         mb: 2,
-                        color: 'hsl(var(--primary))',
+                        color: 'white',
                         fontFamily: 'Poppins, sans-serif',
                         fontWeight: 500,
                       }}
@@ -98,7 +98,7 @@ export const SuccessStoryCarousel: React.FC<SuccessStoryCarouselProps> = ({ stor
                       variant="body1"
                       sx={{
                         mb: 3,
-                        color: 'hsl(var(--muted-foreground))',
+                        color: 'white',
                         fontFamily: 'Poppins, sans-serif',
                         lineHeight: 1.6,
                       }}
@@ -109,11 +109,12 @@ export const SuccessStoryCarousel: React.FC<SuccessStoryCarouselProps> = ({ stor
                       sx={{
                         px: 3,
                         py: 2,
-                        backgroundColor: 'hsl(var(--accent))',
-                        color: 'hsl(var(--accent-foreground))',
+                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                        color: 'white',
                         borderRadius: 'var(--radius)',
                         display: 'inline-block',
                         alignSelf: 'flex-start',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
                       }}
                     >
                       <Typography
@@ -121,6 +122,7 @@ export const SuccessStoryCarousel: React.FC<SuccessStoryCarouselProps> = ({ stor
                         sx={{
                           fontFamily: 'Poppins, sans-serif',
                           fontWeight: 600,
+                          color: 'white',
                         }}
                       >
                         Impact: {story.impact}
@@ -134,38 +136,87 @@ export const SuccessStoryCarousel: React.FC<SuccessStoryCarouselProps> = ({ stor
         </motion.div>
       </Box>
 
-      {/* Navigation Arrows */}
-      <motion.button
+      {/* Navigation Arrows - Always White */}
+      <IconButton
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 dark:bg-black/90 backdrop-blur-sm text-foreground rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-white dark:hover:bg-black transition-all"
+        sx={{
+          position: 'absolute',
+          left: 16,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          backgroundColor: 'white',
+          color: 'black',
+          borderRadius: '50%',
+          width: 48,
+          height: 48,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: 2,
+          backdropFilter: 'blur(8px)',
+          opacity: 0.9,
+          '&:hover': {
+            backgroundColor: 'white',
+            opacity: 1,
+          },
+          zIndex: 10,
+        }}
+        component={motion.button}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        style={{ zIndex: 10 }}
       >
         <ChevronLeft className="w-6 h-6" />
-      </motion.button>
+      </IconButton>
 
-      <motion.button
+      <IconButton
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 dark:bg-black/90 backdrop-blur-sm text-foreground rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-white dark:hover:bg-black transition-all"
+        sx={{
+          position: 'absolute',
+          right: 16,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          backgroundColor: 'white',
+          color: 'black',
+          borderRadius: '50%',
+          width: 48,
+          height: 48,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: 2,
+          backdropFilter: 'blur(8px)',
+          opacity: 0.9,
+          '&:hover': {
+            backgroundColor: 'white',
+            opacity: 1,
+          },
+          zIndex: 10,
+        }}
+        component={motion.button}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        style={{ zIndex: 10 }}
       >
         <ChevronRight className="w-6 h-6" />
-      </motion.button>
+      </IconButton>
 
       {/* Dots Indicator */}
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 4 }}>
         {stories.map((_, index) => (
-          <motion.button
+          <IconButton
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all ${
-              index === currentIndex
-                ? 'bg-primary'
-                : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-            }`}
+            sx={{
+              width: 12,
+              height: 12,
+              minWidth: 12,
+              borderRadius: '50%',
+              backgroundColor: index === currentIndex ? 'white' : 'rgba(255, 255, 255, 0.3)',
+              p: 0,
+              '&:hover': {
+                backgroundColor: index === currentIndex ? 'white' : 'rgba(255, 255, 255, 0.5)',
+              },
+            }}
+            component={motion.button}
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
           />

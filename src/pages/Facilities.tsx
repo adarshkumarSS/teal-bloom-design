@@ -68,7 +68,7 @@ const BackgroundVideoSection = () => {
               textShadow: '0 2px 10px rgba(0,0,0,0.5)',
             }}
           >
-            World-Class Facilities
+            <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>World-Class</Box> Facilities
           </Typography>
           <Typography 
             variant="h5" 

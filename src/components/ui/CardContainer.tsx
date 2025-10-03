@@ -6,13 +6,15 @@ interface CardContainerProps {
   className?: string;
   hover?: boolean;
   onClick?: () => void;
+  style?: React.CSSProperties;
 }
 
-export const CardContainer: React.FC<CardContainerProps> = ({ 
-  children, 
-  className = '', 
+export const CardContainer: React.FC<CardContainerProps> = ({
+  children,
+  className = '',
   hover = true,
-  onClick 
+  onClick,
+  style
 }) => {
   return (
     <motion.div
@@ -22,7 +24,7 @@ export const CardContainer: React.FC<CardContainerProps> = ({
       transition={{ duration: 0.6, ease: 'easeOut' }}
       whileHover={hover ? { y: -4 } : {}}
       onClick={onClick}
-      style={{ cursor: onClick ? 'pointer' : 'default' }}
+      style={{ cursor: onClick ? 'pointer' : 'default', ...style }}
     >
       {children}
     </motion.div>

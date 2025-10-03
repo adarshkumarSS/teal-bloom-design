@@ -533,7 +533,7 @@ export const Portfolio: React.FC = () => {
               fontWeight: 600,
             }}
           >
-            Our Portfolio
+            <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>Our </Box>  Portfolio
           </Typography>
         </motion.div>
       </Container>

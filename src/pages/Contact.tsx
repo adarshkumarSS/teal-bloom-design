@@ -4,6 +4,7 @@ import { CardContainer } from '../components/ui/CardContainer';
 import { OutlinedTextField } from '../components/ui/OutlinedTextField';
 import { DarkButton } from '../components/ui/DarkButton';
 import { useState } from 'react';
+import { Phone } from '@mui/icons-material';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -340,7 +341,7 @@ const MapSection = () => {
     <Box 
       sx={{ 
         py: 8,
-        backgroundColor: 'hsl(var(--accent))',
+        backgroundColor: (theme) => theme.palette.mode === 'dark' ? '#000000' : 'hsl(var(--background))',
       }}
     >
       <Container maxWidth="lg">
@@ -355,12 +356,12 @@ const MapSection = () => {
             align="center"
             sx={{ 
               mb: 8,
-              color: 'hsl(var(--accent-foreground))',
+              color: (theme) => theme.palette.mode === 'dark' ? '#ffffff' : 'hsl(var(--foreground))',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 600,
             }}
           >
-            <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>Find</Box> Us Here
+            <Box component="span" sx={{ color: 'hsl(var(--primary))' }}>Find</Box> Us Here
           </Typography>
           
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 6 }}>
@@ -369,18 +370,18 @@ const MapSection = () => {
                 sx={{
                   width: '100%',
                   height: 400,
-                  backgroundColor: 'hsl(var(--card))',
+                  backgroundColor: (theme) => theme.palette.mode === 'dark' ? '#1a1a1a' : 'hsl(var(--card))',
                   borderRadius: 'var(--radius)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '2px solid hsl(var(--border))',
+                  border: (theme) => theme.palette.mode === 'dark' ? '1px solid #333' : '1px solid hsl(var(--border))',
                 }}
               >
                 <Typography 
                   variant="h6" 
                   sx={{ 
-                    color: 'hsl(var(--muted-foreground))',
+                    color: (theme) => theme.palette.mode === 'dark' ? '#999' : 'hsl(var(--muted-foreground))',
                     fontFamily: 'Poppins, sans-serif',
                   }}
                 >
@@ -397,7 +398,7 @@ const MapSection = () => {
                       width: 60,
                       height: 60,
                       borderRadius: '50%',
-                      backgroundColor: 'hsl(var(--destructive))',
+                      backgroundColor: 'hsl(var(--primary))',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -407,30 +408,30 @@ const MapSection = () => {
                     <Typography 
                       variant="h6"
                       sx={{ 
-                        color: 'white',
+                        color: 'hsl(var(--primary-foreground))',
                         fontFamily: 'Poppins, sans-serif',
                         fontWeight: 600,
                       }}
                     >
-                      📞
+                      <Phone sx={{ color: 'white', fontSize: 24 }} />
                     </Typography>
                   </Box>
                   <Box>
                     <Typography 
                       variant="h6"
                       sx={{
-                        color: 'hsl(var(--foreground))',
+                        color: (theme) => theme.palette.mode === 'dark' ? '#ffffff' : 'hsl(var(--foreground))',
                         fontFamily: 'Poppins, sans-serif',
                         fontWeight: 600,
                         mb: 1,
                       }}
                     >
-                      <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>Quick</Box> Contact
+                      <Box component="span" sx={{ color: 'hsl(var(--primary))' }}>Quick</Box> Contact
                     </Typography>
                     <Typography 
                       variant="body2" 
                       sx={{ 
-                        color: 'hsl(var(--muted-foreground))',
+                        color: (theme) => theme.palette.mode === 'dark' ? '#cccccc' : 'hsl(var(--muted-foreground))',
                         fontFamily: 'Poppins, sans-serif',
                       }}
                     >
@@ -444,7 +445,7 @@ const MapSection = () => {
                     <Typography 
                       variant="h6" 
                       sx={{ 
-                        color: 'hsl(var(--destructive))',
+                        color: 'hsl(var(--primary))',
                         fontFamily: 'Poppins, sans-serif',
                         fontWeight: 600,
                         mb: 1,
@@ -455,7 +456,7 @@ const MapSection = () => {
                     <Typography 
                       variant="body1" 
                       sx={{ 
-                        color: 'hsl(var(--foreground))',
+                        color: (theme) => theme.palette.mode === 'dark' ? '#ffffff' : 'hsl(var(--foreground))',
                         fontFamily: 'Poppins, sans-serif',
                         lineHeight: 1.6,
                       }}
@@ -471,7 +472,7 @@ const MapSection = () => {
                     <Typography 
                       variant="h6" 
                       sx={{ 
-                        color: 'hsl(var(--destructive))',
+                        color: 'hsl(var(--primary))',
                         fontFamily: 'Poppins, sans-serif',
                         fontWeight: 600,
                         mb: 1,
@@ -482,7 +483,7 @@ const MapSection = () => {
                     <Typography 
                       variant="body1" 
                       sx={{ 
-                        color: 'hsl(var(--foreground))',
+                        color: (theme) => theme.palette.mode === 'dark' ? '#ffffff' : 'hsl(var(--foreground))',
                         fontFamily: 'Poppins, sans-serif',
                         lineHeight: 1.6,
                       }}
@@ -501,7 +502,6 @@ const MapSection = () => {
     </Box>
   );
 };
-
 export const Contact: React.FC = () => {
   return (
     <Box sx={{ pt: 16, minHeight: '100vh', backgroundColor: 'hsl(var(--background))' }}>

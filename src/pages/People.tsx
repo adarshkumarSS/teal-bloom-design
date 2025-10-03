@@ -464,7 +464,7 @@ export const People: React.FC = () => {
               fontWeight: 600,
             }}
           >
-            Our People
+            <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>Our </Box>  People
           </Typography>
         </motion.div>
       </Container>

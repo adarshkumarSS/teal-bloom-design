@@ -204,7 +204,8 @@ export const Blogs: React.FC = () => {
               fontWeight: 600,
             }}
           >
-            Insights & Stories
+          <Box component="span" sx={{ color: 'hsl(var(--destructive))' }}>Insights</Box> & Stories
+             
           </Typography>
           <Typography 
             variant="h6" 
