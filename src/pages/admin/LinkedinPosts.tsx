@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DarkButton } from "@/components/ui/DarkButton";
 import { ExternalLink, Heart, MessageCircle } from "lucide-react";
 
-interface LinkedinPost {
+interface LinkedInPost {
   id: string;
   title: string;
   content: string;
@@ -13,7 +13,7 @@ interface LinkedinPost {
   url: string;
 }
 
-const mockPosts: LinkedinPost[] = [
+const mockPosts: LinkedInPost[] = [
   {
     id: "1",
     title: "Exciting New Startups Join TCE-TBI",
@@ -34,7 +34,7 @@ const mockPosts: LinkedinPost[] = [
   },
 ];
 
-export const LinkedinPosts = () => {
+export const LinkedInPosts = () => {
   return (
     <Box
       sx={{
