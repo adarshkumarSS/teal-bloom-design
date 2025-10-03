@@ -298,8 +298,8 @@ export const ApplyIncubation = () => {
 
                   {/* Business Information */}
                   <SectionTitle>Business Information</SectionTitle>
-                  <Grid container spacing={3} alignItems="flex-end">
-                    <Grid size={{ xs: 12, md: 8 }}>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, alignItems: 'flex-end' }}>
+                    <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 calc(66.66% - 12px)' } }}>
                       <StyledTextField
                         fullWidth
                         label="Name of Business"
@@ -312,8 +312,8 @@ export const ApplyIncubation = () => {
                         }
                         required
                       />
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 4 }}>
+                    </Box>
+                    <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 calc(33.33% - 12px)' } }}>
                       <input
                         accept=".pdf,.doc,.docx"
                         style={{ display: "none" }}
@@ -326,8 +326,8 @@ export const ApplyIncubation = () => {
                           Upload Entrepreneur Resume
                         </UploadBox>
                       </label>
-                    </Grid>
-                  </Grid>
+                    </Box>
+                  </Box>
 
                   {/* Personal Information */}
                   <SectionTitle>Lead Entrepreneur Details</SectionTitle>

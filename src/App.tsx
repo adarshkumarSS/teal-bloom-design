@@ -21,7 +21,7 @@ import { UpdateContent } from "./pages/admin/UpdateContent";
 import { Applications } from "./pages/admin/Applications";
 import { Settings } from "./pages/admin/Settings";
 import { RejectedApplications } from "./pages/admin/RejectedApplications";
-import { LinkedinPosts } from "./pages/admin/LinkedinPosts";
+import { LinkedInPosts } from "./pages/admin/LinkedInPosts";
 import { CurrentIncubators } from "./pages/admin/CurrentIncubators";
 import { AdminProfile } from "./pages/admin/AdminProfile";
 
@@ -80,7 +80,7 @@ const AppContent = () => {
         <Route path="/admin/applications" element={<Applications />} />
         <Route path="/admin/settings" element={<Settings />} />
         <Route path="/admin/rejected" element={<RejectedApplications />} />
-        <Route path="/admin/linkedin" element={<LinkedinPosts />} />
+        <Route path="/admin/linkedin" element={<LinkedInPosts />} />
         <Route path="/admin/incubators" element={<CurrentIncubators />} />
         <Route path="/admin/profile" element={<AdminProfile />} />
 
