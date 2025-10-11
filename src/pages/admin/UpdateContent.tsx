@@ -451,27 +451,136 @@ export const UpdateContent = () => {
             </Box>
           )}
 
-          {selectedPage !== "Home" && (
+          {selectedPage === "Portfolio" && (
             <Box sx={{ mt: 4 }}>
-              <Typography
-                variant="body1"
-                sx={{
-                  fontFamily: "Poppins, sans-serif",
-                  color: "hsl(var(--muted-foreground))",
-                }}
-              >
-                Currently editing: <strong>{selectedPage}</strong>
+              <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
+                Portfolio Content
               </Typography>
-              <Typography
-                variant="body2"
-                sx={{
-                  fontFamily: "Poppins, sans-serif",
-                  color: "hsl(var(--muted-foreground))",
-                  mt: 2,
-                }}
-              >
-                Content editor for {selectedPage} will be displayed here...
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                label="Portfolio Description"
+                placeholder="Add portfolio description..."
+                sx={{ mb: 3 }}
+              />
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <DarkButton onClick={handleSave}>Save Changes</DarkButton>
+              </Box>
+            </Box>
+          )}
+
+          {selectedPage === "People" && (
+            <Box sx={{ mt: 4 }}>
+              <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
+                People Content
               </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                label="Team Description"
+                placeholder="Add team description..."
+                sx={{ mb: 3 }}
+              />
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <DarkButton onClick={handleSave}>Save Changes</DarkButton>
+              </Box>
+            </Box>
+          )}
+
+          {selectedPage === "Facilities" && (
+            <Box sx={{ mt: 4 }}>
+              <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
+                Facilities Content
+              </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                label="Facilities Description"
+                placeholder="Add facilities description..."
+                sx={{ mb: 3 }}
+              />
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <DarkButton onClick={handleSave}>Save Changes</DarkButton>
+              </Box>
+            </Box>
+          )}
+
+          {selectedPage === "Program" && (
+            <Box sx={{ mt: 4 }}>
+              <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
+                Program Content
+              </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                label="Program Description"
+                placeholder="Add program description..."
+                sx={{ mb: 3 }}
+              />
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <DarkButton onClick={handleSave}>Save Changes</DarkButton>
+              </Box>
+            </Box>
+          )}
+
+          {selectedPage === "Media" && (
+            <Box sx={{ mt: 4 }}>
+              <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
+                Media Content
+              </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                label="Media Description"
+                placeholder="Add media description..."
+                sx={{ mb: 3 }}
+              />
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <DarkButton onClick={handleSave}>Save Changes</DarkButton>
+              </Box>
+            </Box>
+          )}
+
+          {selectedPage === "Blogs" && (
+            <Box sx={{ mt: 4 }}>
+              <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
+                Blogs Content
+              </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                label="Blog Description"
+                placeholder="Add blog description..."
+                sx={{ mb: 3 }}
+              />
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <DarkButton onClick={handleSave}>Save Changes</DarkButton>
+              </Box>
+            </Box>
+          )}
+
+          {selectedPage === "Contact" && (
+            <Box sx={{ mt: 4 }}>
+              <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
+                Contact Content
+              </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                label="Contact Description"
+                placeholder="Add contact description..."
+                sx={{ mb: 3 }}
+              />
+              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                <DarkButton onClick={handleSave}>Save Changes</DarkButton>
+              </Box>
             </Box>
           )}
         </Box>
