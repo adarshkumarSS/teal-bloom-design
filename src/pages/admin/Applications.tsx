@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Box, Typography, Modal, Backdrop, Fade } from "@mui/material";
+import { Box, Typography, Modal, Backdrop, Fade, IconButton } from "@mui/material";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DarkButton } from "@/components/ui/DarkButton";
-import { Check, X } from "lucide-react";
+import { Check, X, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Application {
   id: string;
@@ -39,6 +40,7 @@ const mockApplications: Application[] = [
 ];
 
 export const Applications = () => {
+  const navigate = useNavigate();
   const [applications] = useState<Application[]>(mockApplications);
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
   const [open, setOpen] = useState(false);
@@ -78,17 +80,27 @@ export const Applications = () => {
           mx: "auto",
         }}
       >
-        <Typography
-          variant="h4"
-          sx={{
-            fontFamily: "Poppins, sans-serif",
-            fontWeight: 700,
-            color: "hsl(var(--foreground))",
-            mb: 4,
-          }}
-        >
-          Incubation Applications
-        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 4 }}>
+          <IconButton
+            onClick={() => navigate("/admin")}
+            sx={{
+              color: "hsl(var(--foreground))",
+              "&:hover": { backgroundColor: "hsl(var(--muted))" },
+            }}
+          >
+            <ArrowLeft size={24} />
+          </IconButton>
+          <Typography
+            variant="h4"
+            sx={{
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 700,
+              color: "hsl(var(--foreground))",
+            }}
+          >
+            Incubation Applications
+          </Typography>
+        </Box>
 
         <Box
           sx={{

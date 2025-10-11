@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Navigation } from "./components/Navigation";
+import { AdminNavigation } from "./components/AdminNavigation";
 import { Home } from "./pages/Home";
 import { Portfolio } from "./pages/Portfolio";
 import { People } from "./pages/People";
@@ -46,6 +47,7 @@ const theme = createTheme({
 const AppContent = () => {
   const location = useLocation();
   const hideNav = ["/auth", "/apply-incubation"].includes(location.pathname);
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
   const [loading, setLoading] = useState(location.pathname === "/");
 
@@ -63,7 +65,8 @@ const AppContent = () => {
 
   return (
     <>
-      {!hideNav && <Navigation />}
+      {!hideNav && !isAdminRoute && <Navigation />}
+      {!hideNav && isAdminRoute && <AdminNavigation />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/portfolio" element={<Portfolio />} />

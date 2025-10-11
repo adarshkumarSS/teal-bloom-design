@@ -1,5 +1,7 @@
-import { Box, Typography, Chip } from "@mui/material";
+import { Box, Typography, Chip, IconButton } from "@mui/material";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface RejectedApplication {
   id: string;
@@ -27,6 +29,8 @@ const mockRejected: RejectedApplication[] = [
 ];
 
 export const RejectedApplications = () => {
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -42,17 +46,27 @@ export const RejectedApplications = () => {
           mx: "auto",
         }}
       >
-        <Typography
-          variant="h4"
-          sx={{
-            fontFamily: "Poppins, sans-serif",
-            fontWeight: 700,
-            color: "hsl(var(--foreground))",
-            mb: 4,
-          }}
-        >
-          Rejected Applications
-        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 4 }}>
+          <IconButton
+            onClick={() => navigate("/admin")}
+            sx={{
+              color: "hsl(var(--foreground))",
+              "&:hover": { backgroundColor: "hsl(var(--muted))" },
+            }}
+          >
+            <ArrowLeft size={24} />
+          </IconButton>
+          <Typography
+            variant="h4"
+            sx={{
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 700,
+              color: "hsl(var(--foreground))",
+            }}
+          >
+            Rejected Applications
+          </Typography>
+        </Box>
 
         <Box
           sx={{
