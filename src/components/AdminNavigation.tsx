@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { DarkButton } from "./ui/DarkButton";
 import { motion } from "framer-motion";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Bell, LogOut, LogIn } from "lucide-react";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: "hsl(var(--background) / 0.8)",
@@ -58,7 +58,7 @@ export const AdminNavigation: React.FC = () => {
       >
         <Toolbar sx={{ minHeight: "80px" }}>
           <LogoContainer sx={{ flexGrow: 1 }}>
-            <Link to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
+            <Link to="/" style={{ display: "flex", alignItems: "center", gap: "16px", textDecoration: "none" }}>
               <img
                 src="/asset/TCE_TBI.png"
                 alt="TBI Logo"
@@ -68,6 +68,16 @@ export const AdminNavigation: React.FC = () => {
                   objectFit: "contain",
                 }}
               />
+              <Box
+                sx={{
+                  fontSize: "1.25rem",
+                  fontWeight: 600,
+                  color: "hsl(var(--foreground))",
+                  fontFamily: "Poppins, sans-serif",
+                }}
+              >
+                Thiagarajar College of Engineering
+              </Box>
             </Link>
           </LogoContainer>
 
@@ -84,8 +94,28 @@ export const AdminNavigation: React.FC = () => {
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </IconButton>
 
+            <IconButton
+              sx={{
+                color: "hsl(var(--foreground))",
+                "&:hover": {
+                  backgroundColor: "hsl(var(--muted))",
+                },
+              }}
+            >
+              <Bell size={20} />
+            </IconButton>
+
             <Link to="/auth" style={{ textDecoration: "none" }}>
-              <DarkButton>Login</DarkButton>
+              <IconButton
+                sx={{
+                  color: "hsl(var(--foreground))",
+                  "&:hover": {
+                    backgroundColor: "hsl(var(--muted))",
+                  },
+                }}
+              >
+                <LogIn size={20} />
+              </IconButton>
             </Link>
           </Box>
         </Toolbar>

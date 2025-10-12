@@ -250,7 +250,29 @@ export const UpdateContent = () => {
                 label="Vision"
                 value={vision}
                 onChange={(e) => setVision(e.target.value)}
-                sx={{ mb: 3 }}
+                sx={{
+                  mb: 3,
+                  '& .MuiInputBase-input': {
+                    color: 'hsl(var(--foreground))',
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: 'hsl(var(--muted-foreground))',
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: 'hsl(0 84.2% 60.2%)',
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'hsl(var(--border))',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'hsl(0 84.2% 60.2%)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'hsl(0 84.2% 60.2%)',
+                    },
+                  },
+                }}
               />
               
               <TextField
@@ -260,7 +282,29 @@ export const UpdateContent = () => {
                 label="Mission"
                 value={mission}
                 onChange={(e) => setMission(e.target.value)}
-                sx={{ mb: 4 }}
+                sx={{
+                  mb: 4,
+                  '& .MuiInputBase-input': {
+                    color: 'hsl(var(--foreground))',
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: 'hsl(var(--muted-foreground))',
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: 'hsl(0 84.2% 60.2%)',
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'hsl(var(--border))',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'hsl(0 84.2% 60.2%)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'hsl(0 84.2% 60.2%)',
+                    },
+                  },
+                }}
               />
 
               {/* Achievements */}
@@ -277,20 +321,50 @@ export const UpdateContent = () => {
                       label="Number"
                       value={achievement.number}
                       onChange={(e) => handleAchievementChange(index, "number", parseInt(e.target.value))}
-                      sx={{ mb: 2 }}
+                      sx={{
+                        mb: 2,
+                        '& .MuiInputBase-input': { color: 'hsl(var(--foreground))' },
+                        '& .MuiInputLabel-root': { color: 'hsl(var(--muted-foreground))' },
+                        '& .MuiInputLabel-root.Mui-focused': { color: 'hsl(0 84.2% 60.2%)' },
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': { borderColor: 'hsl(var(--border))' },
+                          '&:hover fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                          '&.Mui-focused fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                        },
+                      }}
                     />
                     <TextField
                       fullWidth
                       label="Suffix"
                       value={achievement.suffix}
                       onChange={(e) => handleAchievementChange(index, "suffix", e.target.value)}
-                      sx={{ mb: 2 }}
+                      sx={{
+                        mb: 2,
+                        '& .MuiInputBase-input': { color: 'hsl(var(--foreground))' },
+                        '& .MuiInputLabel-root': { color: 'hsl(var(--muted-foreground))' },
+                        '& .MuiInputLabel-root.Mui-focused': { color: 'hsl(0 84.2% 60.2%)' },
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': { borderColor: 'hsl(var(--border))' },
+                          '&:hover fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                          '&.Mui-focused fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                        },
+                      }}
                     />
                     <TextField
                       fullWidth
                       label="Label"
                       value={achievement.label}
                       onChange={(e) => handleAchievementChange(index, "label", e.target.value)}
+                      sx={{
+                        '& .MuiInputBase-input': { color: 'hsl(var(--foreground))' },
+                        '& .MuiInputLabel-root': { color: 'hsl(var(--muted-foreground))' },
+                        '& .MuiInputLabel-root.Mui-focused': { color: 'hsl(0 84.2% 60.2%)' },
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': { borderColor: 'hsl(var(--border))' },
+                          '&:hover fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                          '&.Mui-focused fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                        },
+                      }}
                     />
                   </Box>
                 ))}
@@ -314,7 +388,17 @@ export const UpdateContent = () => {
                         newLogos[index].name = e.target.value;
                         setGovtIndiaLogos(newLogos);
                       }}
-                      sx={{ mb: 2 }}
+                      sx={{
+                        mb: 2,
+                        '& .MuiInputBase-input': { color: 'hsl(var(--foreground))' },
+                        '& .MuiInputLabel-root': { color: 'hsl(var(--muted-foreground))' },
+                        '& .MuiInputLabel-root.Mui-focused': { color: 'hsl(0 84.2% 60.2%)' },
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': { borderColor: 'hsl(var(--border))' },
+                          '&:hover fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                          '&.Mui-focused fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                        },
+                      }}
                     />
                     <input
                       accept="image/*"
@@ -329,6 +413,15 @@ export const UpdateContent = () => {
                         component="span"
                         fullWidth
                         startIcon={<Upload size={16} />}
+                        sx={{
+                          backgroundColor: 'hsl(0 84.2% 60.2%)',
+                          color: 'white',
+                          borderColor: 'hsl(0 84.2% 60.2%)',
+                          '&:hover': {
+                            backgroundColor: 'hsl(0 84.2% 50.2%)',
+                            borderColor: 'hsl(0 84.2% 50.2%)',
+                          },
+                        }}
                       >
                         Upload Image
                       </Button>
@@ -355,7 +448,17 @@ export const UpdateContent = () => {
                         newLogos[index].name = e.target.value;
                         setGovtTNLogos(newLogos);
                       }}
-                      sx={{ mb: 2 }}
+                      sx={{
+                        mb: 2,
+                        '& .MuiInputBase-input': { color: 'hsl(var(--foreground))' },
+                        '& .MuiInputLabel-root': { color: 'hsl(var(--muted-foreground))' },
+                        '& .MuiInputLabel-root.Mui-focused': { color: 'hsl(0 84.2% 60.2%)' },
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': { borderColor: 'hsl(var(--border))' },
+                          '&:hover fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                          '&.Mui-focused fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                        },
+                      }}
                     />
                     <input
                       accept="image/*"
@@ -370,6 +473,15 @@ export const UpdateContent = () => {
                         component="span"
                         fullWidth
                         startIcon={<Upload size={16} />}
+                        sx={{
+                          backgroundColor: 'hsl(0 84.2% 60.2%)',
+                          color: 'white',
+                          borderColor: 'hsl(0 84.2% 60.2%)',
+                          '&:hover': {
+                            backgroundColor: 'hsl(0 84.2% 50.2%)',
+                            borderColor: 'hsl(0 84.2% 50.2%)',
+                          },
+                        }}
                       >
                         Upload Image
                       </Button>
@@ -393,7 +505,17 @@ export const UpdateContent = () => {
                       label="Title"
                       value={story.title}
                       onChange={(e) => handleSuccessStoryChange(index, "title", e.target.value)}
-                      sx={{ mb: 2 }}
+                      sx={{
+                        mb: 2,
+                        '& .MuiInputBase-input': { color: 'hsl(var(--foreground))' },
+                        '& .MuiInputLabel-root': { color: 'hsl(var(--muted-foreground))' },
+                        '& .MuiInputLabel-root.Mui-focused': { color: 'hsl(0 84.2% 60.2%)' },
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': { borderColor: 'hsl(var(--border))' },
+                          '&:hover fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                          '&.Mui-focused fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                        },
+                      }}
                     />
                     
                     <TextField
@@ -403,7 +525,17 @@ export const UpdateContent = () => {
                       label="Description"
                       value={story.description}
                       onChange={(e) => handleSuccessStoryChange(index, "description", e.target.value)}
-                      sx={{ mb: 2 }}
+                      sx={{
+                        mb: 2,
+                        '& .MuiInputBase-input': { color: 'hsl(var(--foreground))' },
+                        '& .MuiInputLabel-root': { color: 'hsl(var(--muted-foreground))' },
+                        '& .MuiInputLabel-root.Mui-focused': { color: 'hsl(0 84.2% 60.2%)' },
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': { borderColor: 'hsl(var(--border))' },
+                          '&:hover fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                          '&.Mui-focused fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                        },
+                      }}
                     />
                     
                     <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, mb: 2 }}>
@@ -412,12 +544,32 @@ export const UpdateContent = () => {
                         label="Sector"
                         value={story.sector}
                         onChange={(e) => handleSuccessStoryChange(index, "sector", e.target.value)}
+                        sx={{
+                          '& .MuiInputBase-input': { color: 'hsl(var(--foreground))' },
+                          '& .MuiInputLabel-root': { color: 'hsl(var(--muted-foreground))' },
+                          '& .MuiInputLabel-root.Mui-focused': { color: 'hsl(0 84.2% 60.2%)' },
+                          '& .MuiOutlinedInput-root': {
+                            '& fieldset': { borderColor: 'hsl(var(--border))' },
+                            '&:hover fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                            '&.Mui-focused fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                          },
+                        }}
                       />
                       <TextField
                         fullWidth
                         label="Impact"
                         value={story.impact}
                         onChange={(e) => handleSuccessStoryChange(index, "impact", e.target.value)}
+                        sx={{
+                          '& .MuiInputBase-input': { color: 'hsl(var(--foreground))' },
+                          '& .MuiInputLabel-root': { color: 'hsl(var(--muted-foreground))' },
+                          '& .MuiInputLabel-root.Mui-focused': { color: 'hsl(0 84.2% 60.2%)' },
+                          '& .MuiOutlinedInput-root': {
+                            '& fieldset': { borderColor: 'hsl(var(--border))' },
+                            '&:hover fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                            '&.Mui-focused fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+                          },
+                        }}
                       />
                     </Box>
                     
@@ -434,6 +586,15 @@ export const UpdateContent = () => {
                         component="span"
                         fullWidth
                         startIcon={<Upload size={16} />}
+                        sx={{
+                          backgroundColor: 'hsl(0 84.2% 60.2%)',
+                          color: 'white',
+                          borderColor: 'hsl(0 84.2% 60.2%)',
+                          '&:hover': {
+                            backgroundColor: 'hsl(0 84.2% 50.2%)',
+                            borderColor: 'hsl(0 84.2% 50.2%)',
+                          },
+                        }}
                       >
                         Upload Image
                       </Button>

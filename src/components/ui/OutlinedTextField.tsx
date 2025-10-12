@@ -10,10 +10,10 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
       borderColor: 'hsl(var(--border))',
     },
     '&:hover fieldset': {
-      borderColor: 'hsl(var(--primary))',
+      borderColor: 'hsl(0 84.2% 60.2%)', // Red color
     },
     '&.Mui-focused fieldset': {
-      borderColor: 'hsl(var(--primary))',
+      borderColor: 'hsl(0 84.2% 60.2%)', // Red color
       borderWidth: '2px',
     },
   },
@@ -21,7 +21,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     fontFamily: 'Poppins, sans-serif',
     color: 'hsl(var(--muted-foreground))',
     '&.Mui-focused': {
-      color: 'hsl(var(--primary))',
+      color: 'hsl(0 84.2% 60.2%)', // Red color
     },
   },
   '& .MuiInputBase-input': {
