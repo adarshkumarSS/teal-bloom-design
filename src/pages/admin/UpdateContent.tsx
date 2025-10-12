@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Typography, IconButton, TextField, Button } from "@mui/material";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Bell, LogOut, ArrowLeft, Upload, X } from "lucide-react";
+import { Bell, LogOut, ArrowLeft, Upload, X, Plus, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DarkButton } from "@/components/ui/DarkButton";
 
@@ -81,6 +81,49 @@ export const UpdateContent = () => {
     },
   ]);
 
+  // Portfolio states
+  const [currentStartups, setCurrentStartups] = useState([
+    { name: "Startup 1", description: "Description 1", image: "", category: "Tech" },
+    { name: "Startup 2", description: "Description 2", image: "", category: "HealthTech" },
+  ]);
+  const [graduatedStartups, setGraduatedStartups] = useState([
+    { name: "Graduated 1", description: "Description 1", image: "", category: "FinTech" },
+    { name: "Graduated 2", description: "Description 2", image: "", category: "EdTech" },
+  ]);
+
+  // People states
+  const [founder, setFounder] = useState({ name: "Dr. John Doe", role: "Founder", bio: "Visionary leader with 20 years of experience", image: "" });
+  const [ceo, setCeo] = useState({ name: "Jane Smith", role: "CEO", bio: "Strategic thinker driving innovation", image: "" });
+  const [boardMembers, setBoardMembers] = useState([
+    { name: "Member 1", role: "Board Member", bio: "Expert in technology", image: "" },
+    { name: "Member 2", role: "Board Member", bio: "Finance specialist", image: "" },
+  ]);
+
+  // Facilities states
+  const [facilityVideo, setFacilityVideo] = useState({ link: "https://example.com/video", description: "State-of-the-art facilities", details: "Our facilities include modern labs and workspaces" });
+  const [sharedInfra, setSharedInfra] = useState("High-speed internet, meeting rooms, collaboration spaces");
+  const [tcetbiInfra, setTcetbiInfra] = useState("Innovation labs, prototyping equipment, testing facilities");
+
+  // Program states
+  const [programs, setPrograms] = useState([
+    { title: "Incubation Program", description: "6-month intensive program", duration: "6 months", benefits: "Mentorship, funding, resources" },
+    { title: "Acceleration Program", description: "3-month growth program", duration: "3 months", benefits: "Scaling support, investor connect" },
+  ]);
+
+  // Media states
+  const [mediaImages, setMediaImages] = useState([
+    { title: "Event 1", image: "", date: "2024-01-15", description: "Annual startup showcase" },
+    { title: "Event 2", image: "", date: "2024-02-20", description: "Innovation summit" },
+  ]);
+
+  // Contact states
+  const [contactInfo, setContactInfo] = useState({
+    address: "123 Innovation Street, Chennai",
+    email: "contact@tcetbi.com",
+    phone: "+91 1234567890",
+    officeHours: "Mon-Fri: 9AM-6PM",
+  });
+
   const handleLogout = () => {
     navigate("/auth");
   };
@@ -127,16 +170,30 @@ export const UpdateContent = () => {
   };
 
   const handleSave = () => {
-    console.log("Saving content...", {
-      vision,
-      mission,
-      achievements,
-      govtIndiaLogos,
-      govtTNLogos,
-      successStories,
-    });
+    console.log("Saving content for", selectedPage);
     // TODO: Implement actual save functionality
-    alert("Content saved successfully!");
+    alert(`${selectedPage} content saved successfully!`);
+  };
+
+  const textFieldStyles = {
+    '& .MuiInputBase-input': { color: 'hsl(var(--foreground))' },
+    '& .MuiInputLabel-root': { color: 'hsl(var(--muted-foreground))' },
+    '& .MuiInputLabel-root.Mui-focused': { color: 'hsl(0 84.2% 60.2%)' },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': { borderColor: 'hsl(var(--border))' },
+      '&:hover fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+      '&.Mui-focused fieldset': { borderColor: 'hsl(0 84.2% 60.2%)' },
+    },
+  };
+
+  const uploadButtonStyles = {
+    backgroundColor: 'hsl(0 84.2% 60.2%)',
+    color: 'white',
+    borderColor: 'hsl(0 84.2% 60.2%)',
+    '&:hover': {
+      backgroundColor: 'hsl(0 84.2% 50.2%)',
+      borderColor: 'hsl(0 84.2% 50.2%)',
+    },
   };
 
   return (
@@ -224,7 +281,7 @@ export const UpdateContent = () => {
           </Typography>
 
           <Select value={selectedPage} onValueChange={setSelectedPage}>
-            <SelectTrigger className="w-full max-w-xs">
+            <SelectTrigger className="w-full max-w-xs text-foreground">
               <SelectValue placeholder="Select a page" />
             </SelectTrigger>
             <SelectContent>
@@ -614,18 +671,89 @@ export const UpdateContent = () => {
 
           {selectedPage === "Portfolio" && (
             <Box sx={{ mt: 4 }}>
+              {/* Current Startups */}
               <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
-                Portfolio Content
+                Current Startups
               </Typography>
-              <TextField
-                fullWidth
-                multiline
-                rows={4}
-                label="Portfolio Description"
-                placeholder="Add portfolio description..."
-                sx={{ mb: 3 }}
-              />
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              {currentStartups.map((startup, index) => (
+                <Box key={index} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }}>
+                  <TextField fullWidth label="Name" value={startup.name} onChange={(e) => {
+                    const updated = [...currentStartups];
+                    updated[index].name = e.target.value;
+                    setCurrentStartups(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth multiline rows={2} label="Description" value={startup.description} onChange={(e) => {
+                    const updated = [...currentStartups];
+                    updated[index].description = e.target.value;
+                    setCurrentStartups(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth label="Category" value={startup.category} onChange={(e) => {
+                    const updated = [...currentStartups];
+                    updated[index].category = e.target.value;
+                    setCurrentStartups(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  {startup.image && <img src={startup.image} alt={startup.name} style={{ width: "100%", maxHeight: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "12px" }} />}
+                  <input accept="image/*" style={{ display: "none" }} id={`current-startup-${index}`} type="file" onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        const updated = [...currentStartups];
+                        updated[index].image = reader.result as string;
+                        setCurrentStartups(updated);
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }} />
+                  <label htmlFor={`current-startup-${index}`}>
+                    <Button variant="outlined" component="span" fullWidth startIcon={<Upload size={16} />} sx={uploadButtonStyles}>Upload Image</Button>
+                  </label>
+                </Box>
+              ))}
+              <Button startIcon={<Plus />} onClick={() => setCurrentStartups([...currentStartups, { name: "", description: "", image: "", category: "" }])} sx={{ ...uploadButtonStyles, mb: 4 }}>Add Startup</Button>
+
+              {/* Graduated Startups */}
+              <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3, mt: 4 }}>
+                Graduated Startups
+              </Typography>
+              {graduatedStartups.map((startup, index) => (
+                <Box key={index} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }}>
+                  <TextField fullWidth label="Name" value={startup.name} onChange={(e) => {
+                    const updated = [...graduatedStartups];
+                    updated[index].name = e.target.value;
+                    setGraduatedStartups(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth multiline rows={2} label="Description" value={startup.description} onChange={(e) => {
+                    const updated = [...graduatedStartups];
+                    updated[index].description = e.target.value;
+                    setGraduatedStartups(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth label="Category" value={startup.category} onChange={(e) => {
+                    const updated = [...graduatedStartups];
+                    updated[index].category = e.target.value;
+                    setGraduatedStartups(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  {startup.image && <img src={startup.image} alt={startup.name} style={{ width: "100%", maxHeight: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "12px" }} />}
+                  <input accept="image/*" style={{ display: "none" }} id={`graduated-startup-${index}`} type="file" onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        const updated = [...graduatedStartups];
+                        updated[index].image = reader.result as string;
+                        setGraduatedStartups(updated);
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }} />
+                  <label htmlFor={`graduated-startup-${index}`}>
+                    <Button variant="outlined" component="span" fullWidth startIcon={<Upload size={16} />} sx={uploadButtonStyles}>Upload Image</Button>
+                  </label>
+                </Box>
+              ))}
+              <Button startIcon={<Plus />} onClick={() => setGraduatedStartups([...graduatedStartups, { name: "", description: "", image: "", category: "" }])} sx={uploadButtonStyles}>Add Graduated Startup</Button>
+
+              <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
                 <DarkButton onClick={handleSave}>Save Changes</DarkButton>
               </Box>
             </Box>
@@ -633,18 +761,92 @@ export const UpdateContent = () => {
 
           {selectedPage === "People" && (
             <Box sx={{ mt: 4 }}>
+              {/* Founder */}
               <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
-                People Content
+                Founder
               </Typography>
-              <TextField
-                fullWidth
-                multiline
-                rows={4}
-                label="Team Description"
-                placeholder="Add team description..."
-                sx={{ mb: 3 }}
-              />
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Box sx={{ p: 3, mb: 4, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }}>
+                <TextField fullWidth label="Name" value={founder.name} onChange={(e) => setFounder({ ...founder, name: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
+                <TextField fullWidth label="Role" value={founder.role} onChange={(e) => setFounder({ ...founder, role: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
+                <TextField fullWidth multiline rows={3} label="Bio" value={founder.bio} onChange={(e) => setFounder({ ...founder, bio: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
+                {founder.image && <img src={founder.image} alt={founder.name} style={{ width: "100%", maxHeight: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "12px" }} />}
+                <input accept="image/*" style={{ display: "none" }} id="founder-image" type="file" onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => setFounder({ ...founder, image: reader.result as string });
+                    reader.readAsDataURL(file);
+                  }
+                }} />
+                <label htmlFor="founder-image">
+                  <Button variant="outlined" component="span" fullWidth startIcon={<Upload size={16} />} sx={uploadButtonStyles}>Upload Image</Button>
+                </label>
+              </Box>
+
+              {/* CEO */}
+              <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
+                CEO
+              </Typography>
+              <Box sx={{ p: 3, mb: 4, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }}>
+                <TextField fullWidth label="Name" value={ceo.name} onChange={(e) => setCeo({ ...ceo, name: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
+                <TextField fullWidth label="Role" value={ceo.role} onChange={(e) => setCeo({ ...ceo, role: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
+                <TextField fullWidth multiline rows={3} label="Bio" value={ceo.bio} onChange={(e) => setCeo({ ...ceo, bio: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
+                {ceo.image && <img src={ceo.image} alt={ceo.name} style={{ width: "100%", maxHeight: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "12px" }} />}
+                <input accept="image/*" style={{ display: "none" }} id="ceo-image" type="file" onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => setCeo({ ...ceo, image: reader.result as string });
+                    reader.readAsDataURL(file);
+                  }
+                }} />
+                <label htmlFor="ceo-image">
+                  <Button variant="outlined" component="span" fullWidth startIcon={<Upload size={16} />} sx={uploadButtonStyles}>Upload Image</Button>
+                </label>
+              </Box>
+
+              {/* Board Members */}
+              <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
+                Board Members
+              </Typography>
+              {boardMembers.map((member, index) => (
+                <Box key={index} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }}>
+                  <TextField fullWidth label="Name" value={member.name} onChange={(e) => {
+                    const updated = [...boardMembers];
+                    updated[index].name = e.target.value;
+                    setBoardMembers(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth label="Role" value={member.role} onChange={(e) => {
+                    const updated = [...boardMembers];
+                    updated[index].role = e.target.value;
+                    setBoardMembers(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth multiline rows={3} label="Bio" value={member.bio} onChange={(e) => {
+                    const updated = [...boardMembers];
+                    updated[index].bio = e.target.value;
+                    setBoardMembers(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  {member.image && <img src={member.image} alt={member.name} style={{ width: "100%", maxHeight: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "12px" }} />}
+                  <input accept="image/*" style={{ display: "none" }} id={`board-member-${index}`} type="file" onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        const updated = [...boardMembers];
+                        updated[index].image = reader.result as string;
+                        setBoardMembers(updated);
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }} />
+                  <label htmlFor={`board-member-${index}`}>
+                    <Button variant="outlined" component="span" fullWidth startIcon={<Upload size={16} />} sx={uploadButtonStyles}>Upload Image</Button>
+                  </label>
+                </Box>
+              ))}
+              <Button startIcon={<Plus />} onClick={() => setBoardMembers([...boardMembers, { name: "", role: "", bio: "", image: "" }])} sx={uploadButtonStyles}>Add Board Member</Button>
+
+              <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
                 <DarkButton onClick={handleSave}>Save Changes</DarkButton>
               </Box>
             </Box>
@@ -652,18 +854,29 @@ export const UpdateContent = () => {
 
           {selectedPage === "Facilities" && (
             <Box sx={{ mt: 4 }}>
+              {/* Facility Showcase Video */}
               <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
-                Facilities Content
+                Facility Showcase Video
               </Typography>
-              <TextField
-                fullWidth
-                multiline
-                rows={4}
-                label="Facilities Description"
-                placeholder="Add facilities description..."
-                sx={{ mb: 3 }}
-              />
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Box sx={{ p: 3, mb: 4, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }}>
+                <TextField fullWidth label="Video Link" value={facilityVideo.link} onChange={(e) => setFacilityVideo({ ...facilityVideo, link: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
+                <TextField fullWidth label="Description" value={facilityVideo.description} onChange={(e) => setFacilityVideo({ ...facilityVideo, description: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
+                <TextField fullWidth multiline rows={3} label="Details" value={facilityVideo.details} onChange={(e) => setFacilityVideo({ ...facilityVideo, details: e.target.value })} sx={textFieldStyles} />
+              </Box>
+
+              {/* Shared Infrastructure */}
+              <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
+                Shared Infrastructure
+              </Typography>
+              <TextField fullWidth multiline rows={4} label="Shared Infrastructure Details" value={sharedInfra} onChange={(e) => setSharedInfra(e.target.value)} sx={{ ...textFieldStyles, mb: 4 }} />
+
+              {/* TCETBI Infrastructure */}
+              <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
+                TCETBI Infrastructure
+              </Typography>
+              <TextField fullWidth multiline rows={4} label="TCETBI Infrastructure Details" value={tcetbiInfra} onChange={(e) => setTcetbiInfra(e.target.value)} sx={textFieldStyles} />
+
+              <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
                 <DarkButton onClick={handleSave}>Save Changes</DarkButton>
               </Box>
             </Box>
@@ -672,17 +885,35 @@ export const UpdateContent = () => {
           {selectedPage === "Program" && (
             <Box sx={{ mt: 4 }}>
               <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
-                Program Content
+                Programs
               </Typography>
-              <TextField
-                fullWidth
-                multiline
-                rows={4}
-                label="Program Description"
-                placeholder="Add program description..."
-                sx={{ mb: 3 }}
-              />
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              {programs.map((program, index) => (
+                <Box key={index} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }}>
+                  <TextField fullWidth label="Title" value={program.title} onChange={(e) => {
+                    const updated = [...programs];
+                    updated[index].title = e.target.value;
+                    setPrograms(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth multiline rows={3} label="Description" value={program.description} onChange={(e) => {
+                    const updated = [...programs];
+                    updated[index].description = e.target.value;
+                    setPrograms(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth label="Duration" value={program.duration} onChange={(e) => {
+                    const updated = [...programs];
+                    updated[index].duration = e.target.value;
+                    setPrograms(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth multiline rows={2} label="Benefits" value={program.benefits} onChange={(e) => {
+                    const updated = [...programs];
+                    updated[index].benefits = e.target.value;
+                    setPrograms(updated);
+                  }} sx={textFieldStyles} />
+                </Box>
+              ))}
+              <Button startIcon={<Plus />} onClick={() => setPrograms([...programs, { title: "", description: "", duration: "", benefits: "" }])} sx={uploadButtonStyles}>Add Program</Button>
+
+              <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
                 <DarkButton onClick={handleSave}>Save Changes</DarkButton>
               </Box>
             </Box>
@@ -691,17 +922,46 @@ export const UpdateContent = () => {
           {selectedPage === "Media" && (
             <Box sx={{ mt: 4 }}>
               <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
-                Media Content
+                Media Gallery
               </Typography>
-              <TextField
-                fullWidth
-                multiline
-                rows={4}
-                label="Media Description"
-                placeholder="Add media description..."
-                sx={{ mb: 3 }}
-              />
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              {mediaImages.map((media, index) => (
+                <Box key={index} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }}>
+                  <TextField fullWidth label="Title" value={media.title} onChange={(e) => {
+                    const updated = [...mediaImages];
+                    updated[index].title = e.target.value;
+                    setMediaImages(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth type="date" label="Date" value={media.date} onChange={(e) => {
+                    const updated = [...mediaImages];
+                    updated[index].date = e.target.value;
+                    setMediaImages(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} InputLabelProps={{ shrink: true }} />
+                  <TextField fullWidth multiline rows={2} label="Description" value={media.description} onChange={(e) => {
+                    const updated = [...mediaImages];
+                    updated[index].description = e.target.value;
+                    setMediaImages(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  {media.image && <img src={media.image} alt={media.title} style={{ width: "100%", maxHeight: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "12px" }} />}
+                  <input accept="image/*" style={{ display: "none" }} id={`media-image-${index}`} type="file" onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        const updated = [...mediaImages];
+                        updated[index].image = reader.result as string;
+                        setMediaImages(updated);
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }} />
+                  <label htmlFor={`media-image-${index}`}>
+                    <Button variant="outlined" component="span" fullWidth startIcon={<Upload size={16} />} sx={uploadButtonStyles}>Upload Image</Button>
+                  </label>
+                </Box>
+              ))}
+              <Button startIcon={<Plus />} onClick={() => setMediaImages([...mediaImages, { title: "", image: "", date: "", description: "" }])} sx={uploadButtonStyles}>Add Media Item</Button>
+
+              <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
                 <DarkButton onClick={handleSave}>Save Changes</DarkButton>
               </Box>
             </Box>
@@ -729,17 +989,16 @@ export const UpdateContent = () => {
           {selectedPage === "Contact" && (
             <Box sx={{ mt: 4 }}>
               <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
-                Contact Content
+                Contact Information
               </Typography>
-              <TextField
-                fullWidth
-                multiline
-                rows={4}
-                label="Contact Description"
-                placeholder="Add contact description..."
-                sx={{ mb: 3 }}
-              />
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Box sx={{ p: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }}>
+                <TextField fullWidth label="Address" value={contactInfo.address} onChange={(e) => setContactInfo({ ...contactInfo, address: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
+                <TextField fullWidth label="Email" type="email" value={contactInfo.email} onChange={(e) => setContactInfo({ ...contactInfo, email: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
+                <TextField fullWidth label="Phone" value={contactInfo.phone} onChange={(e) => setContactInfo({ ...contactInfo, phone: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
+                <TextField fullWidth label="Office Hours" value={contactInfo.officeHours} onChange={(e) => setContactInfo({ ...contactInfo, officeHours: e.target.value })} sx={textFieldStyles} />
+              </Box>
+
+              <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
                 <DarkButton onClick={handleSave}>Save Changes</DarkButton>
               </Box>
             </Box>
