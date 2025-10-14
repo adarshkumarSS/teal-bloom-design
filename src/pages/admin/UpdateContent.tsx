@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Typography, IconButton, TextField, Button } from "@mui/material";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Bell, LogOut, ArrowLeft, Upload, X, Plus, Trash2 } from "lucide-react";
+import { ArrowLeft, Upload, X, Plus, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DarkButton } from "@/components/ui/DarkButton";
 
@@ -100,9 +100,57 @@ export const UpdateContent = () => {
   ]);
 
   // Facilities states
-  const [facilityVideo, setFacilityVideo] = useState({ link: "https://example.com/video", description: "State-of-the-art facilities", details: "Our facilities include modern labs and workspaces" });
-  const [sharedInfra, setSharedInfra] = useState("High-speed internet, meeting rooms, collaboration spaces");
-  const [tcetbiInfra, setTcetbiInfra] = useState("Innovation labs, prototyping equipment, testing facilities");
+  const [facilityVideos, setFacilityVideos] = useState([
+    { link: "https://example.com/video1", description: "State-of-the-art facilities", details: "Our facilities include modern labs and workspaces" },
+  ]);
+  
+  const [sharedInfra, setSharedInfra] = useState([
+    {
+      id: 1,
+      name: 'Co-working Spaces',
+      description: 'Flexible workspaces with modern amenities for startups at different stages.',
+      image: '/api/placeholder/300/200',
+      features: ['24/7 Access', 'High-Speed Internet', 'Meeting Rooms', 'Coffee Station']
+    },
+    {
+      id: 2,
+      name: 'Innovation Labs',
+      description: 'Fully equipped laboratories for research, development, and testing.',
+      image: '/api/placeholder/300/200',
+      features: ['Latest Equipment', 'Testing Facilities', 'Research Support', 'Safety Protocols']
+    },
+    {
+      id: 3,
+      name: 'Fabrication Workshop',
+      description: 'Complete fabrication facility with 3D printing and prototyping tools.',
+      image: '/api/placeholder/300/200',
+      features: ['3D Printing', 'CNC Machines', 'Electronics Lab', 'Material Testing']
+    }
+  ]);
+
+  const [tcetbiInfra, setTcetbiInfra] = useState([
+    {
+      id: 4,
+      name: 'Auditorium',
+      description: 'State-of-the-art auditorium for events, presentations, and workshops.',
+      image: '/api/placeholder/300/200',
+      features: ['200 Seating', 'AV Equipment', 'Stage Lighting', 'Recording Setup']
+    },
+    {
+      id: 5,
+      name: 'Conference Halls',
+      description: 'Professional conference facilities for meetings and networking events.',
+      image: '/api/placeholder/300/200',
+      features: ['Video Conferencing', 'Presentation Setup', 'Comfortable Seating', 'Catering Services']
+    },
+    {
+      id: 6,
+      name: 'Library & Resource Center',
+      description: 'Comprehensive library with business resources and quiet study areas.',
+      image: '/api/placeholder/300/200',
+      features: ['Business Books', 'Digital Resources', 'Study Areas', 'Research Support']
+    }
+  ]);
 
   // Program states
   const [programs, setPrograms] = useState([
@@ -241,23 +289,6 @@ export const UpdateContent = () => {
             </Typography>
           </Box>
 
-          <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-            <IconButton
-              sx={{
-                color: "hsl(var(--foreground))",
-                "&:hover": { backgroundColor: "hsl(var(--muted))" },
-              }}
-            >
-              <Bell size={24} />
-            </IconButton>
-            <DarkButton
-              startIcon={<LogOut />}
-              onClick={handleLogout}
-              sx={{ color: "#fff" }}
-            >
-              Logout
-            </DarkButton>
-          </Box>
         </Box>
 
         <Box
@@ -854,27 +885,120 @@ export const UpdateContent = () => {
 
           {selectedPage === "Facilities" && (
             <Box sx={{ mt: 4 }}>
-              {/* Facility Showcase Video */}
+              {/* Facility Showcase Videos */}
               <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
-                Facility Showcase Video
+                Facility Showcase Videos
               </Typography>
-              <Box sx={{ p: 3, mb: 4, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }}>
-                <TextField fullWidth label="Video Link" value={facilityVideo.link} onChange={(e) => setFacilityVideo({ ...facilityVideo, link: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
-                <TextField fullWidth label="Description" value={facilityVideo.description} onChange={(e) => setFacilityVideo({ ...facilityVideo, description: e.target.value })} sx={{ ...textFieldStyles, mb: 2 }} />
-                <TextField fullWidth multiline rows={3} label="Details" value={facilityVideo.details} onChange={(e) => setFacilityVideo({ ...facilityVideo, details: e.target.value })} sx={textFieldStyles} />
-              </Box>
+              {facilityVideos.map((video, index) => (
+                <Box key={index} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)", position: "relative" }}>
+                  {facilityVideos.length > 1 && (
+                    <IconButton
+                      onClick={() => setFacilityVideos(facilityVideos.filter((_, i) => i !== index))}
+                      sx={{ position: "absolute", top: 8, right: 8, color: "hsl(0 84.2% 60.2%)" }}
+                    >
+                      <Trash2 size={20} />
+                    </IconButton>
+                  )}
+                  <TextField fullWidth label="Video Link" value={video.link} onChange={(e) => {
+                    const updated = [...facilityVideos];
+                    updated[index].link = e.target.value;
+                    setFacilityVideos(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth label="Description" value={video.description} onChange={(e) => {
+                    const updated = [...facilityVideos];
+                    updated[index].description = e.target.value;
+                    setFacilityVideos(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth multiline rows={3} label="Details" value={video.details} onChange={(e) => {
+                    const updated = [...facilityVideos];
+                    updated[index].details = e.target.value;
+                    setFacilityVideos(updated);
+                  }} sx={textFieldStyles} />
+                </Box>
+              ))}
+              <Button startIcon={<Plus />} onClick={() => setFacilityVideos([...facilityVideos, { link: "", description: "", details: "" }])} sx={{ ...uploadButtonStyles, mb: 4 }}>Add Video</Button>
 
               {/* Shared Infrastructure */}
               <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
                 Shared Infrastructure
               </Typography>
-              <TextField fullWidth multiline rows={4} label="Shared Infrastructure Details" value={sharedInfra} onChange={(e) => setSharedInfra(e.target.value)} sx={{ ...textFieldStyles, mb: 4 }} />
+              {sharedInfra.map((facility, index) => (
+                <Box key={facility.id} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)", position: "relative" }}>
+                  {sharedInfra.length > 1 && (
+                    <IconButton
+                      onClick={() => setSharedInfra(sharedInfra.filter((_, i) => i !== index))}
+                      sx={{ position: "absolute", top: 8, right: 8, color: "hsl(0 84.2% 60.2%)" }}
+                    >
+                      <Trash2 size={20} />
+                    </IconButton>
+                  )}
+                  <TextField fullWidth label="Name" value={facility.name} onChange={(e) => {
+                    const updated = [...sharedInfra];
+                    updated[index].name = e.target.value;
+                    setSharedInfra(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth multiline rows={2} label="Description" value={facility.description} onChange={(e) => {
+                    const updated = [...sharedInfra];
+                    updated[index].description = e.target.value;
+                    setSharedInfra(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth label="Image URL" value={facility.image} onChange={(e) => {
+                    const updated = [...sharedInfra];
+                    updated[index].image = e.target.value;
+                    setSharedInfra(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth multiline rows={2} label="Features (comma-separated)" value={facility.features.join(', ')} onChange={(e) => {
+                    const updated = [...sharedInfra];
+                    updated[index].features = e.target.value.split(',').map(f => f.trim());
+                    setSharedInfra(updated);
+                  }} sx={textFieldStyles} />
+                </Box>
+              ))}
+              <Button startIcon={<Plus />} onClick={() => {
+                const newId = Math.max(...sharedInfra.map(f => f.id), 0) + 1;
+                setSharedInfra([...sharedInfra, { id: newId, name: "", description: "", image: "", features: [] }]);
+              }} sx={{ ...uploadButtonStyles, mb: 4 }}>Add Shared Infrastructure</Button>
 
               {/* TCETBI Infrastructure */}
               <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
                 TCETBI Infrastructure
               </Typography>
-              <TextField fullWidth multiline rows={4} label="TCETBI Infrastructure Details" value={tcetbiInfra} onChange={(e) => setTcetbiInfra(e.target.value)} sx={textFieldStyles} />
+              {tcetbiInfra.map((facility, index) => (
+                <Box key={facility.id} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)", position: "relative" }}>
+                  {tcetbiInfra.length > 1 && (
+                    <IconButton
+                      onClick={() => setTcetbiInfra(tcetbiInfra.filter((_, i) => i !== index))}
+                      sx={{ position: "absolute", top: 8, right: 8, color: "hsl(0 84.2% 60.2%)" }}
+                    >
+                      <Trash2 size={20} />
+                    </IconButton>
+                  )}
+                  <TextField fullWidth label="Name" value={facility.name} onChange={(e) => {
+                    const updated = [...tcetbiInfra];
+                    updated[index].name = e.target.value;
+                    setTcetbiInfra(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth multiline rows={2} label="Description" value={facility.description} onChange={(e) => {
+                    const updated = [...tcetbiInfra];
+                    updated[index].description = e.target.value;
+                    setTcetbiInfra(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth label="Image URL" value={facility.image} onChange={(e) => {
+                    const updated = [...tcetbiInfra];
+                    updated[index].image = e.target.value;
+                    setTcetbiInfra(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  <TextField fullWidth multiline rows={2} label="Features (comma-separated)" value={facility.features.join(', ')} onChange={(e) => {
+                    const updated = [...tcetbiInfra];
+                    updated[index].features = e.target.value.split(',').map(f => f.trim());
+                    setTcetbiInfra(updated);
+                  }} sx={textFieldStyles} />
+                </Box>
+              ))}
+              <Button startIcon={<Plus />} onClick={() => {
+                const newId = Math.max(...tcetbiInfra.map(f => f.id), 0) + 1;
+                setTcetbiInfra([...tcetbiInfra, { id: newId, name: "", description: "", image: "", features: [] }]);
+              }} sx={uploadButtonStyles}>Add TCETBI Infrastructure</Button>
 
               <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
                 <DarkButton onClick={handleSave}>Save Changes</DarkButton>
