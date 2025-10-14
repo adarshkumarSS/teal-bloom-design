@@ -154,8 +154,17 @@ export const UpdateContent = () => {
 
   // Program states
   const [programs, setPrograms] = useState([
-    { title: "Incubation Program", description: "6-month intensive program", duration: "6 months", benefits: "Mentorship, funding, resources" },
-    { title: "Acceleration Program", description: "3-month growth program", duration: "3 months", benefits: "Scaling support, investor connect" },
+    { 
+      title: "Startup Accelerator Program", 
+      description: "Intensive 6-month program for early-stage startups with mentorship, funding, and market access.", 
+      image: "/api/placeholder/400/200",
+      duration: "6 months", 
+      category: "live",
+      startDate: "Jan 2024",
+      endDate: "Jun 2024",
+      participants: "25",
+      status: "Live"
+    },
   ]);
 
   // Media states
@@ -1012,7 +1021,15 @@ export const UpdateContent = () => {
                 Programs
               </Typography>
               {programs.map((program, index) => (
-                <Box key={index} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }}>
+                <Box key={index} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)", position: "relative" }}>
+                  {programs.length > 1 && (
+                    <IconButton
+                      onClick={() => setPrograms(programs.filter((_, i) => i !== index))}
+                      sx={{ position: "absolute", top: 8, right: 8, color: "hsl(0 84.2% 60.2%)" }}
+                    >
+                      <Trash2 size={20} />
+                    </IconButton>
+                  )}
                   <TextField fullWidth label="Title" value={program.title} onChange={(e) => {
                     const updated = [...programs];
                     updated[index].title = e.target.value;
@@ -1023,19 +1040,77 @@ export const UpdateContent = () => {
                     updated[index].description = e.target.value;
                     setPrograms(updated);
                   }} sx={{ ...textFieldStyles, mb: 2 }} />
-                  <TextField fullWidth label="Duration" value={program.duration} onChange={(e) => {
+                  <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, mb: 2 }}>
+                    <TextField fullWidth label="Duration" value={program.duration} onChange={(e) => {
+                      const updated = [...programs];
+                      updated[index].duration = e.target.value;
+                      setPrograms(updated);
+                    }} sx={textFieldStyles} />
+                    <TextField fullWidth label="Category" value={program.category} onChange={(e) => {
+                      const updated = [...programs];
+                      updated[index].category = e.target.value;
+                      setPrograms(updated);
+                    }} sx={textFieldStyles} />
+                  </Box>
+                  <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, mb: 2 }}>
+                    <TextField fullWidth label="Start Date" value={program.startDate} onChange={(e) => {
+                      const updated = [...programs];
+                      updated[index].startDate = e.target.value;
+                      setPrograms(updated);
+                    }} sx={textFieldStyles} />
+                    <TextField fullWidth label="End Date" value={program.endDate} onChange={(e) => {
+                      const updated = [...programs];
+                      updated[index].endDate = e.target.value;
+                      setPrograms(updated);
+                    }} sx={textFieldStyles} />
+                  </Box>
+                  <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, mb: 2 }}>
+                    <TextField fullWidth label="Participants" type="number" value={program.participants} onChange={(e) => {
+                      const updated = [...programs];
+                      updated[index].participants = e.target.value;
+                      setPrograms(updated);
+                    }} sx={textFieldStyles} />
+                    <TextField fullWidth label="Status" value={program.status} onChange={(e) => {
+                      const updated = [...programs];
+                      updated[index].status = e.target.value;
+                      setPrograms(updated);
+                    }} sx={textFieldStyles} />
+                  </Box>
+                  <TextField fullWidth label="Image URL" value={program.image} onChange={(e) => {
                     const updated = [...programs];
-                    updated[index].duration = e.target.value;
+                    updated[index].image = e.target.value;
                     setPrograms(updated);
                   }} sx={{ ...textFieldStyles, mb: 2 }} />
-                  <TextField fullWidth multiline rows={2} label="Benefits" value={program.benefits} onChange={(e) => {
-                    const updated = [...programs];
-                    updated[index].benefits = e.target.value;
-                    setPrograms(updated);
-                  }} sx={textFieldStyles} />
+                  <input accept="image/*" style={{ display: "none" }} id={`program-image-${index}`} type="file" onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        const updated = [...programs];
+                        updated[index].image = reader.result as string;
+                        setPrograms(updated);
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }} />
+                  <label htmlFor={`program-image-${index}`}>
+                    <Button component="span" variant="outlined" startIcon={<Upload />} sx={uploadButtonStyles}>
+                      Upload Program Image
+                    </Button>
+                  </label>
                 </Box>
               ))}
-              <Button startIcon={<Plus />} onClick={() => setPrograms([...programs, { title: "", description: "", duration: "", benefits: "" }])} sx={uploadButtonStyles}>Add Program</Button>
+              <Button startIcon={<Plus />} onClick={() => setPrograms([...programs, { 
+                title: "", 
+                description: "", 
+                image: "",
+                duration: "", 
+                category: "",
+                startDate: "",
+                endDate: "",
+                participants: "",
+                status: ""
+              }])} sx={uploadButtonStyles}>Add Program</Button>
 
               <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
                 <DarkButton onClick={handleSave}>Save Changes</DarkButton>
