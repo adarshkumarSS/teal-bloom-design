@@ -169,8 +169,7 @@ export const UpdateContent = () => {
 
   // Media states
   const [mediaImages, setMediaImages] = useState([
-    { title: "Event 1", image: "", date: "2024-01-15", description: "Annual startup showcase" },
-    { title: "Event 2", image: "", date: "2024-02-20", description: "Innovation summit" },
+    { id: 1, src: "", alt: "", category: "", title: "", description: "", album: "" },
   ]);
 
   // Contact states
@@ -1124,30 +1123,49 @@ export const UpdateContent = () => {
                 Media Gallery
               </Typography>
               {mediaImages.map((media, index) => (
-                <Box key={index} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)" }}>
+                <Box key={media.id} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)", position: "relative" }}>
+                  <IconButton onClick={() => setMediaImages(mediaImages.filter(m => m.id !== media.id))} sx={{ position: "absolute", top: 8, right: 8, color: "hsl(0 84.2% 60.2%)" }}>
+                    <Trash2 size={20} />
+                  </IconButton>
+                  
                   <TextField fullWidth label="Title" value={media.title} onChange={(e) => {
                     const updated = [...mediaImages];
                     updated[index].title = e.target.value;
                     setMediaImages(updated);
                   }} sx={{ ...textFieldStyles, mb: 2 }} />
-                  <TextField fullWidth type="date" label="Date" value={media.date} onChange={(e) => {
+                  
+                  <TextField fullWidth label="Alt Text" value={media.alt} onChange={(e) => {
                     const updated = [...mediaImages];
-                    updated[index].date = e.target.value;
+                    updated[index].alt = e.target.value;
                     setMediaImages(updated);
-                  }} sx={{ ...textFieldStyles, mb: 2 }} InputLabelProps={{ shrink: true }} />
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  
+                  <TextField fullWidth label="Category" value={media.category} onChange={(e) => {
+                    const updated = [...mediaImages];
+                    updated[index].category = e.target.value;
+                    setMediaImages(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} placeholder="e.g., events, workshops, meetings" />
+                  
+                  <TextField fullWidth label="Album" value={media.album} onChange={(e) => {
+                    const updated = [...mediaImages];
+                    updated[index].album = e.target.value;
+                    setMediaImages(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} placeholder="Album name" />
+                  
                   <TextField fullWidth multiline rows={2} label="Description" value={media.description} onChange={(e) => {
                     const updated = [...mediaImages];
                     updated[index].description = e.target.value;
                     setMediaImages(updated);
                   }} sx={{ ...textFieldStyles, mb: 2 }} />
-                  {media.image && <img src={media.image} alt={media.title} style={{ width: "100%", maxHeight: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "12px" }} />}
+                  
+                  {media.src && <img src={media.src} alt={media.alt || media.title} style={{ width: "100%", maxHeight: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "12px" }} />}
                   <input accept="image/*" style={{ display: "none" }} id={`media-image-${index}`} type="file" onChange={(e) => {
                     const file = e.target.files?.[0];
                     if (file) {
                       const reader = new FileReader();
                       reader.onloadend = () => {
                         const updated = [...mediaImages];
-                        updated[index].image = reader.result as string;
+                        updated[index].src = reader.result as string;
                         setMediaImages(updated);
                       };
                       reader.readAsDataURL(file);
@@ -1158,7 +1176,15 @@ export const UpdateContent = () => {
                   </label>
                 </Box>
               ))}
-              <Button startIcon={<Plus />} onClick={() => setMediaImages([...mediaImages, { title: "", image: "", date: "", description: "" }])} sx={uploadButtonStyles}>Add Media Item</Button>
+              <Button startIcon={<Plus />} onClick={() => setMediaImages([...mediaImages, { 
+                id: mediaImages.length + 1, 
+                src: "", 
+                alt: "", 
+                category: "", 
+                title: "", 
+                description: "", 
+                album: "" 
+              }])} sx={uploadButtonStyles}>Add Media Item</Button>
 
               <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
                 <DarkButton onClick={handleSave}>Save Changes</DarkButton>
