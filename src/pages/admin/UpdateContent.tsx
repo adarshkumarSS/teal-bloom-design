@@ -172,6 +172,21 @@ export const UpdateContent = () => {
     { id: 1, src: "", alt: "", category: "", title: "", description: "", album: "" },
   ]);
 
+  // Blog states
+  const [blogs, setBlogs] = useState([
+    {
+      id: 1,
+      title: "The Future of Startup Incubation: Trends to Watch in 2024",
+      excerpt: "Explore the latest trends shaping the startup ecosystem and how incubators are adapting to support emerging technologies and business models.",
+      content: "",
+      author: "Dr. Sarah Johnson",
+      date: "March 15, 2024",
+      category: "Innovation",
+      image: "/api/placeholder/400/240",
+      readTime: 5
+    },
+  ]);
+
   // Contact states
   const [contactInfo, setContactInfo] = useState({
     address: "123 Innovation Street, Chennai",
@@ -1195,17 +1210,100 @@ export const UpdateContent = () => {
           {selectedPage === "Blogs" && (
             <Box sx={{ mt: 4 }}>
               <Typography variant="h5" sx={{ fontFamily: "Poppins", fontWeight: 600, color: "hsl(var(--foreground))", mb: 3 }}>
-                Blogs Content
+                Blog Posts
               </Typography>
-              <TextField
-                fullWidth
-                multiline
-                rows={4}
-                label="Blog Description"
-                placeholder="Add blog description..."
-                sx={{ mb: 3 }}
-              />
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              {blogs.map((blog, index) => (
+                <Box key={blog.id} sx={{ p: 3, mb: 3, border: "1px solid hsl(var(--border))", borderRadius: "var(--radius)", position: "relative" }}>
+                  {blogs.length > 1 && (
+                    <IconButton
+                      onClick={() => setBlogs(blogs.filter(b => b.id !== blog.id))}
+                      sx={{ position: "absolute", top: 8, right: 8, color: "hsl(0 84.2% 60.2%)" }}
+                    >
+                      <Trash2 size={20} />
+                    </IconButton>
+                  )}
+                  
+                  <TextField fullWidth label="Title" value={blog.title} onChange={(e) => {
+                    const updated = [...blogs];
+                    updated[index].title = e.target.value;
+                    setBlogs(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  
+                  <TextField fullWidth multiline rows={2} label="Excerpt" value={blog.excerpt} onChange={(e) => {
+                    const updated = [...blogs];
+                    updated[index].excerpt = e.target.value;
+                    setBlogs(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  
+                  <TextField fullWidth multiline rows={4} label="Content" value={blog.content} onChange={(e) => {
+                    const updated = [...blogs];
+                    updated[index].content = e.target.value;
+                    setBlogs(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  
+                  <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, mb: 2 }}>
+                    <TextField fullWidth label="Author" value={blog.author} onChange={(e) => {
+                      const updated = [...blogs];
+                      updated[index].author = e.target.value;
+                      setBlogs(updated);
+                    }} sx={textFieldStyles} />
+                    <TextField fullWidth label="Date" value={blog.date} onChange={(e) => {
+                      const updated = [...blogs];
+                      updated[index].date = e.target.value;
+                      setBlogs(updated);
+                    }} sx={textFieldStyles} />
+                  </Box>
+                  
+                  <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, mb: 2 }}>
+                    <TextField fullWidth label="Category" value={blog.category} onChange={(e) => {
+                      const updated = [...blogs];
+                      updated[index].category = e.target.value;
+                      setBlogs(updated);
+                    }} sx={textFieldStyles} />
+                    <TextField fullWidth label="Read Time (minutes)" type="number" value={blog.readTime} onChange={(e) => {
+                      const updated = [...blogs];
+                      updated[index].readTime = Number(e.target.value);
+                      setBlogs(updated);
+                    }} sx={textFieldStyles} />
+                  </Box>
+                  
+                  <TextField fullWidth label="Image URL" value={blog.image} onChange={(e) => {
+                    const updated = [...blogs];
+                    updated[index].image = e.target.value;
+                    setBlogs(updated);
+                  }} sx={{ ...textFieldStyles, mb: 2 }} />
+                  
+                  {blog.image && <img src={blog.image} alt={blog.title} style={{ width: "100%", maxHeight: "200px", objectFit: "cover", borderRadius: "8px", marginBottom: "12px" }} />}
+                  <input accept="image/*" style={{ display: "none" }} id={`blog-image-${index}`} type="file" onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        const updated = [...blogs];
+                        updated[index].image = reader.result as string;
+                        setBlogs(updated);
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }} />
+                  <label htmlFor={`blog-image-${index}`}>
+                    <Button variant="outlined" component="span" fullWidth startIcon={<Upload size={16} />} sx={uploadButtonStyles}>Upload Image</Button>
+                  </label>
+                </Box>
+              ))}
+              <Button startIcon={<Plus />} onClick={() => setBlogs([...blogs, { 
+                id: Math.max(...blogs.map(b => b.id), 0) + 1,
+                title: "", 
+                excerpt: "", 
+                content: "",
+                author: "",
+                date: "",
+                category: "",
+                image: "",
+                readTime: 5
+              }])} sx={uploadButtonStyles}>Add Blog Post</Button>
+
+              <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
                 <DarkButton onClick={handleSave}>Save Changes</DarkButton>
               </Box>
             </Box>
